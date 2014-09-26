@@ -12,7 +12,11 @@ void MovieType::Initialize(string title, string year, string receipts, string st
 }
 
 int MovieType::compareKeys(const MovieType &p2){
-    return m_title == p2.m_title;
+    //return m_title == p2.m_title;
+
+    return(m_title.compare(p2.m_title));
+
+
 }
 
 void MovieType::Display(){
@@ -66,3 +70,4 @@ void MovieType::ReadOneMovieFromFile(){
 
     file.close();
 }
+

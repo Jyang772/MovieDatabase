@@ -50,63 +50,86 @@ bool SortedMovieList::add(const ListItemType &newItem){
 
     string newTitle = newItem.m_title;
     string strCmp; //For comparing titles;
-    int index = size-1;
+    int index = 0;
     bool done = false;
 
-    for(int i=0; i<size;i++)
-    {
-        strCmp = items[i].m_title;
-        int current = i;
-#ifdef DEBUG
-        cout << "items[i].title: " << strCmp << endl;
-        cout << "newTitle: " << newTitle << endl;
-#endif
 
-//        cout << strCmp.compare(newTitle) << endl;
-//        if((strCmp.compare(newTitle) > 0) && (i == 0)){ //If less than and index == 0
-//            index = 0;
-//            break;
-//        }
-//        else if(strCmp.compare(newTitle) > 0){      //If less than
-//            index = i;
-//            //break;
-//        }
-//        else if(strCmp.compare(newTitle) < 0){
-//            index = i+1;
-//            //break;
-//        }
+    for(int i=0; i<size;i++){
 
-
-    int length = max(strCmp.length(),newTitle.length());       //Compare each character. Z > A. If greater than and index of original title == 0. Done. Otherwise continue.
-
-        //int length = strCmp.length() > newTitle.length() ? strCmp.length() : newTitle.length();
-        //int length = strCmp.length();
-        // cout << "LENGTH: " << length << endl;
-
-        for(int i=0; i<length;i++)
-        {
-            if(strCmp[i] > newTitle[i] && current == 0){
-                index = 0;
-                done = true;
-                break;
-            }
-            else if(strCmp[i] > newTitle[i]){
-                index = current;
-                break;
-            }
-            else if(strCmp[i] < newTitle[i]){
-                index = current+1;
-                break;
-            }
-
-        }
-        if(done)
+        if(items[i].compareKeys(newItem) < 0 && (i==0)){
+            index = 0;
+            cout << "newItem1: " << newItem.m_title << endl;
             break;
+        }
+        else if(items[i].compareKeys(newItem) < 0){
+            cout << "newItem2: " << newItem.m_title << endl;
 
+            index = i;
+        }
+        else if(items[i].compareKeys(newItem) > 0){
+            cout << "newItem3: " << newItem.m_title << endl;
+
+            index = i+1;
+        }
 
     }
 
     insert(index,newItem);
+cout << "------" << endl;
+
+
+//    for(int i=0; i<size;i++)
+//    {
+//        strCmp = items[i].m_title;
+//        int current = i;
+//#ifdef DEBUG
+//        cout << "items[i].title: " << strCmp << endl;
+//        cout << "newTitle: " << newTitle << endl;
+//#endif
+
+////        cout << strCmp.compare(newTitle) << endl;
+////        if((strCmp.compare(newTitle) > 0) && (i == 0)){ //If less than and index == 0
+////            index = 0;
+////            break;
+////        }
+////        else if(strCmp.compare(newTitle) > 0){      //If less than
+////            index = i;
+////            //break;
+////        }
+////        else if(strCmp.compare(newTitle) < 0){
+////            index = i+1;
+////            //break;
+////        }
+
+
+//    int length = max(strCmp.length(),newTitle.length());       //Compare each character. Z > A. If greater than and index of original title == 0. Done. Otherwise continue.
+
+//        //int length = strCmp.length() > newTitle.length() ? strCmp.length() : newTitle.length();
+//        //int length = strCmp.length();
+//        // cout << "LENGTH: " << length << endl;
+
+//        for(int i=0; i<length;i++)
+//        {
+//            if(strCmp[i] > newTitle[i] && current == 0){
+//                index = 0;
+//                done = true;
+//                break;
+//            }
+//            else if(strCmp[i] > newTitle[i]){
+//                index = current;
+//                break;
+//            }
+//            else if(strCmp[i] < newTitle[i]){
+//                index = current+1;
+//                break;
+//            }
+
+//        }
+//        if(done)
+//            break;
+
+
+//    }
 
 #ifdef DEBUG
     cout << "index: " << index << endl;

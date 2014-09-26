@@ -13,7 +13,6 @@ public:
     void ReadOneMovieFromFile();
     void Display();
 
-
 //private:
     string m_title; //key
     string m_year;
