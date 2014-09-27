@@ -1,8 +1,6 @@
 
 #include "MovieType.h"
 
-#include "fstream"
-
 void MovieType::Initialize(string title, string year, string receipts, string studio, string stars){
     m_title = title;
     m_year = year;
@@ -14,9 +12,26 @@ void MovieType::Initialize(string title, string year, string receipts, string st
 int MovieType::compareKeys(const MovieType &p2){
     //return m_title == p2.m_title;
 
-    return(m_title.compare(p2.m_title));
+    //return(m_title.compare(p2.m_title));
 
 
+
+        int length = m_title.length() > p2.m_title.length() ? m_title.length() : p2.m_title.length();        //Compare each character. Z > A. If greater than and index of original title == 0. Done. Otherwise continue.
+
+
+            for(int i=0; i<length;i++)
+            {
+                if(tolower(m_title[i]) > tolower(p2.m_title[i]) && i == 0){
+                    return 1;
+                }
+                else if(tolower(m_title[i]) > tolower(p2.m_title[i])){
+                    return 1;
+                }
+                else if(tolower(m_title[i]) < tolower(p2.m_title[i])){
+                    return -1;
+                }
+            }
+            return 0;
 }
 
 void MovieType::Display(){
@@ -27,47 +42,20 @@ void MovieType::Display(){
     cout << "Stars: " << m_stars << endl;
 }
 
-void MovieType::ReadOneMovieFromFile(){
+bool MovieType::ReadOneMovieFromFile(ifstream& file){
 
-    ifstream file;
-    file.open("data");
-    string line;
+    string line, lastLine;
 
-    getline(file,line); // First line (title)
-    m_title = line;
+    getline(file,m_title);
+    if(m_title == "***")
+        return false;
+    file >> m_year;
+    file >> m_receipts;
+    file >> m_studio;
+    getline(file,m_stars);
 
-    getline(file,line); // Second line(year, receipt)
+    m_stars = m_stars.substr(m_stars.find(",")+2,m_stars.length());
 
-
-    int space = line.find(" ");
-    m_year.resize(space);       //Resize string length
-
-    for(int i = 0; i < space; i++){
-        m_year[i] = line[i];
-        //cout << m_year[i] << endl;
-    }
-
-    m_receipts.resize(line.length()-space);
-    for(int i = 0; i < line.length()-space-1; i++){
-        m_receipts[i] = line[(space+1)+i];
-    }
-    cout << m_receipts << endl << endl;
-
-    getline(file,line);
-    space = line.find(",");
-    m_studio.resize(space);
-
-    for(int i=0; i<space;i++)
-        m_studio[i] = line[i];
-
-
-    m_stars.resize(line.length()-space);
-    for(int i=0;i<line.length()-space;i++)
-        m_stars[i] = line[(space+2)+i];     //+2 for ", "
-
-
-   // m_receipts = line.substr(space+1,line.length());
-
-    file.close();
+    return true;
 }
 

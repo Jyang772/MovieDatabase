@@ -3,6 +3,7 @@
 
 #include <string>
 #include <iostream>
+#include "fstream"
 using namespace std;
 
 
@@ -10,7 +11,7 @@ class MovieType{
 public:
     void Initialize(string, string, string, string, string);
     int compareKeys(const MovieType& p2);
-    void ReadOneMovieFromFile();
+    bool ReadOneMovieFromFile(ifstream&);
     void Display();
 
 //private:

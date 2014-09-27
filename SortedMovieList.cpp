@@ -56,19 +56,17 @@ bool SortedMovieList::add(const ListItemType &newItem){
 
     for(int i=0; i<size;i++){
 
-        if(items[i].compareKeys(newItem) < 0 && (i==0)){
-            index = 0;
-            cout << "newItem1: " << newItem.m_title << endl;
+//        if(items[i].compareKeys(newItem) > 0 && (i==0)){
+//            index = 0;
+//            cout << "newItem1: " << newItem.m_title << endl;
+//        }
+         if(items[i].compareKeys(newItem) > 0){
+            cout << "newItem2: " << newItem.m_title << endl;
+            index = i;
             break;
         }
         else if(items[i].compareKeys(newItem) < 0){
-            cout << "newItem2: " << newItem.m_title << endl;
-
-            index = i;
-        }
-        else if(items[i].compareKeys(newItem) > 0){
             cout << "newItem3: " << newItem.m_title << endl;
-
             index = i+1;
         }
 
