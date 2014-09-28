@@ -79,6 +79,7 @@ int main()
     cin >> choice;
 
     switch(choice){
+    //skips here. No declare variable lawuawlawl
     case 1:
     {
             dataBank.display();
