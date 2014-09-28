@@ -1,4 +1,5 @@
 #include "SortedMovieList.h"
+#include "algorithm"
 
 #ifndef max
 #define max(x,y) ((x) > (y) ? (x) : (y))
@@ -61,73 +62,16 @@ bool SortedMovieList::add(const ListItemType &newItem){
 //            cout << "newItem1: " << newItem.m_title << endl;
 //        }
          if(items[i].compareKeys(newItem) > 0){
-            cout << "newItem2: " << newItem.m_title << endl;
             index = i;
             break;
         }
         else if(items[i].compareKeys(newItem) < 0){
-            cout << "newItem3: " << newItem.m_title << endl;
             index = i+1;
         }
 
     }
-
     insert(index,newItem);
-cout << "------" << endl;
 
-
-//    for(int i=0; i<size;i++)
-//    {
-//        strCmp = items[i].m_title;
-//        int current = i;
-//#ifdef DEBUG
-//        cout << "items[i].title: " << strCmp << endl;
-//        cout << "newTitle: " << newTitle << endl;
-//#endif
-
-////        cout << strCmp.compare(newTitle) << endl;
-////        if((strCmp.compare(newTitle) > 0) && (i == 0)){ //If less than and index == 0
-////            index = 0;
-////            break;
-////        }
-////        else if(strCmp.compare(newTitle) > 0){      //If less than
-////            index = i;
-////            //break;
-////        }
-////        else if(strCmp.compare(newTitle) < 0){
-////            index = i+1;
-////            //break;
-////        }
-
-
-//    int length = max(strCmp.length(),newTitle.length());       //Compare each character. Z > A. If greater than and index of original title == 0. Done. Otherwise continue.
-
-//        //int length = strCmp.length() > newTitle.length() ? strCmp.length() : newTitle.length();
-//        //int length = strCmp.length();
-//        // cout << "LENGTH: " << length << endl;
-
-//        for(int i=0; i<length;i++)
-//        {
-//            if(strCmp[i] > newTitle[i] && current == 0){
-//                index = 0;
-//                done = true;
-//                break;
-//            }
-//            else if(strCmp[i] > newTitle[i]){
-//                index = current;
-//                break;
-//            }
-//            else if(strCmp[i] < newTitle[i]){
-//                index = current+1;
-//                break;
-//            }
-
-//        }
-//        if(done)
-//            break;
-
-
-//    }
 
 #ifdef DEBUG
     cout << "index: " << index << endl;
@@ -138,19 +82,71 @@ cout << "------" << endl;
     return true;
 }
 
+void SortedMovieList::display() const {
+
+    for(int i=0; i<size;i++)
+        cout << items[i].m_title << endl;
+}
+
 bool SortedMovieList::retrieve(int index, ListItemType &dataItem) const{
 
     if( index < 0 || index >= size )
         return false;  // bad index
-
 
     dataItem = items[index];
 
     return true;
 
 }
-void SortedMovieList::display() const {
 
+
+
+
+
+void SortedMovieList::retrieve(string name) const{
+
+    string compare;
+    int match = 0;
     for(int i=0; i<size;i++)
-        cout << items[i].m_title << endl;
+    {
+        compare.resize(items[i].m_title.length());
+        transform(items[i].m_title.begin(),items[i].m_title.end(),compare.begin(),::tolower);
+        cout << "compare: " << compare << endl;
+
+        if(compare.compare(name) == 0){
+            display(items[i]);
+            return;
+        }
+    }
+
+    cout << "\nMovie Not Found. Did you mean?\n" << endl;
+
+    for(int i=0; i<size;i++){
+        for(int j=0; j<items[i].m_title.length();j++){
+            if(tolower(items[i].m_title[j]) == tolower(name[match]))
+                match++;
+            else{
+                if(tolower(items[i].m_title[j]) == tolower(name[0]))
+                    match = 1;
+                else
+                    match = 0;
+            }
+            if(match == name.length()){
+                display(items[i]);
+                break;}
+        }
+    }
+
+
+    cout << "Movie Not Found" << endl;
+
+}
+
+void SortedMovieList::display(const ListItemType &dataItem) const{
+
+    cout << "Movie: " << dataItem.m_title << endl;
+    cout << "Year: " << dataItem.m_year << endl;
+    cout << "Receipt: $ " << dataItem.m_receipts << endl;
+    cout << "Studio: " << dataItem.m_studio << endl;
+    cout << "Stars: " << dataItem.m_stars << endl;
 }

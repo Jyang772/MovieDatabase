@@ -17,6 +17,9 @@ public:
     bool retrieve(int index, ListItemType& dataItem) const;
     void display() const;
 
+    void retrieve(string name) const;
+    void display(const ListItemType& dataItem) const;
+
 private:
     ListItemType items[MAX_LIST];
     int size;

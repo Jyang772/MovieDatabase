@@ -19,12 +19,12 @@ int MovieType::compareKeys(const MovieType &p2){
         int length = m_title.length() > p2.m_title.length() ? m_title.length() : p2.m_title.length();        //Compare each character. Z > A. If greater than and index of original title == 0. Done. Otherwise continue.
 
 
+        //Iterate through each character. If a character is greater than the other, return -1,0,1.
+        //If is first character, exit loop and return value. Otherwise if same characters, continue thru until diff. character
+        //Use tolower because case must be same. Otherwise a > P ??? or A < a (a-P) == 17
             for(int i=0; i<length;i++)
             {
-                if(tolower(m_title[i]) > tolower(p2.m_title[i]) && i == 0){
-                    return 1;
-                }
-                else if(tolower(m_title[i]) > tolower(p2.m_title[i])){
+                 if(tolower(m_title[i]) > tolower(p2.m_title[i])){
                     return 1;
                 }
                 else if(tolower(m_title[i]) < tolower(p2.m_title[i])){

@@ -29,7 +29,7 @@ int main()
     Test2.Display();
 
     Test3.m_title = "ABC";
-    Test4.m_title = "Zebra";
+    Test4.m_title = "abZebra";
 
 
 
@@ -39,7 +39,7 @@ int main()
     dataBank.add(Test4);
     dataBank.display();
 
-
+    dataBank.retrieve("ab");
 
 }
 
