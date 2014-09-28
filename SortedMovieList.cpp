@@ -102,11 +102,26 @@ bool SortedMovieList::retrieve(int index, ListItemType &dataItem) const{
 
 
 
+void SortedMovieList::remove(string name){
+
+    for(int i=0; i<size;i++){
+        string compare;
+        compare.resize(items[i].m_title.length());
+        transform(items[i].m_title.begin(),items[i].m_title.end(),compare.begin(),::tolower);
+        transform(name.begin(),name.end(),name.begin(),::tolower);
+
+        if(compare.compare(name) == 0)
+        {
+            remove(i);
+            break;
+        }
+    }
+}
 
 void SortedMovieList::retrieve(string name) const{
 
     string compare;
-    int match = 0;
+    unsigned int match = 0;
     for(int i=0; i<size;i++)
     {
         compare.resize(items[i].m_title.length());
@@ -119,10 +134,10 @@ void SortedMovieList::retrieve(string name) const{
         }
     }
 
-    cout << "\nMovie Not Found. Did you mean?\n" << endl;
+    cout << "\nMovie Not Found. Displaying similar results:\n" << endl;
 
     for(int i=0; i<size;i++){
-        for(int j=0; j<items[i].m_title.length();j++){
+        for(unsigned int j=0; j<items[i].m_title.length();j++){
             if(tolower(items[i].m_title[j]) == tolower(name[match]))
                 match++;
             else{
@@ -134,11 +149,11 @@ void SortedMovieList::retrieve(string name) const{
             if(match == name.length()){
                 display(items[i]);
                 break;}
+            else if(match == name.length()/2){
+                display(items[i]);
+                break;}
+            }
         }
-    }
-
-
-    cout << "Movie Not Found" << endl;
 
 }
 

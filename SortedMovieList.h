@@ -17,6 +17,7 @@ public:
     bool retrieve(int index, ListItemType& dataItem) const;
     void display() const;
 
+    void remove(string name);
     void retrieve(string name) const;
     void display(const ListItemType& dataItem) const;
 
