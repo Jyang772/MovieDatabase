@@ -2,7 +2,7 @@
 #define SORTEDMOVIELIST_H
 
 #include "MovieType.h"
-const int MAX_LIST = 10;
+const int MAX_LIST = 20;
 typedef MovieType ListItemType;
 
 

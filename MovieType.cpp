@@ -44,17 +44,25 @@ void MovieType::Display(){
 
 bool MovieType::ReadOneMovieFromFile(ifstream& file){
 
-    string line, lastLine;
-
+    string sentinel = "***";
     getline(file,m_title);
-    if(m_title == "***")
-        return false;
+
+    if(m_title == sentinel){
+        cout << "END" << endl;
+        return false;}
+
     file >> m_year;
     file >> m_receipts;
     file >> m_studio;
     getline(file,m_stars);
 
-    m_stars = m_stars.substr(m_stars.find(",")+2,m_stars.length());
+    cout << "m_stars_b: " << m_stars << endl;
+
+    if(m_stars != "")
+    m_stars = m_stars.substr(m_stars.find(",")+2);
+
+
+    cout << "m_stars: " << m_stars << endl;
 
     return true;
 }

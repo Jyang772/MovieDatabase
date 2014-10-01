@@ -102,6 +102,8 @@ bool SortedMovieList::retrieve(int index, ListItemType &dataItem) const{
 
 
 
+
+//Overloaded functions
 void SortedMovieList::remove(string name){
 
     for(int i=0; i<size;i++){
