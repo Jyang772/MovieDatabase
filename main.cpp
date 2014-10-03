@@ -23,8 +23,6 @@ int main()
     MovieType Test;
     MovieType Test2,Test3,Test4;
 
-
-
     Test3.m_title = "ABC";
     Test4.m_title = "abZebra";
 
@@ -53,6 +51,7 @@ int main()
     cout << "[5] Count" << endl;
     cout << "[6] Quit" << endl;
     cin >> choice;
+    cin.ignore(50,'\n');
 
     switch(choice){
     //skips here. No declare variable lawuawlawl
@@ -65,7 +64,8 @@ int main()
     {
         string input;
         cout << "Enter movie title: ";
-        cin >> input;
+        getline(cin,input);
+       // cin >> input;
         dataBank.retrieve(input);
         break;
     }

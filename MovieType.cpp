@@ -14,11 +14,7 @@ int MovieType::compareKeys(const MovieType &p2){
 
     //return(m_title.compare(p2.m_title));
 
-
-
         int length = m_title.length() > p2.m_title.length() ? m_title.length() : p2.m_title.length();        //Compare each character. Z > A. If greater than and index of original title == 0. Done. Otherwise continue.
-
-
         //Iterate through each character. If a character is greater than the other, return -1,0,1.
         //If is first character, exit loop and return value. Otherwise if same characters, continue thru until diff. character
         //Use tolower because case must be same. Otherwise a > P ??? or A < a (a-P) == 17
@@ -48,7 +44,6 @@ bool MovieType::ReadOneMovieFromFile(ifstream& file){
     getline(file,m_title);
 
     if(m_title == sentinel){
-        cout << "END" << endl;
         return false;}
 
     file >> m_year;
@@ -56,13 +51,9 @@ bool MovieType::ReadOneMovieFromFile(ifstream& file){
     file >> m_studio;
     getline(file,m_stars);
 
-    cout << "m_stars_b: " << m_stars << endl;
-
     if(m_stars != "")
     m_stars = m_stars.substr(m_stars.find(",")+2);
 
-
-    cout << "m_stars: " << m_stars << endl;
 
     return true;
 }

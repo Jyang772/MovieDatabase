@@ -118,12 +118,46 @@ void SortedMovieList::remove(string name){
             break;
         }
     }
+
+    //        /*****/
+    //        /*Binary Search*/
+
+    //        cout << "size: " << size << endl;
+    //        int mid = size/2;
+    //        int first = 0, last = size;
+    //        string compare;
+
+    //        while(true){
+
+    //            compare.resize(items[mid].m_title.length());
+    //            transform(items[mid].m_title.begin(),items[mid].m_title.end(),compare.begin(),::tolower);
+
+    //            if(compare.compare(name) == 0){
+    //                display(items[mid]);
+    //                remove(mid);
+    //                return;
+    //            }
+    //            else if(name.compare(compare) < 0)
+    //                last = mid - 1;
+    //            else
+    //                first = mid + 1;
+
+    //            if(first > last)
+    //                break;
+
+    //            mid = (first + last)/2;
+    //        }
+    //        /****/
+
 }
 
 void SortedMovieList::retrieve(string name) const{
 
     string compare;
     unsigned int match = 0;
+
+    transform(name.begin(),name.end(),name.begin(),::tolower);
+
     for(int i=0; i<size;i++)
     {
         compare.resize(items[i].m_title.length());
@@ -135,6 +169,36 @@ void SortedMovieList::retrieve(string name) const{
             return;
         }
     }
+
+
+//    /*****/
+//    /*Binary Search*/
+
+//    cout << "size: " << size << endl;
+//    int mid = size/2;
+//    int first = 0, last = size;
+
+//    while(true){
+
+//        compare.resize(items[mid].m_title.length());
+//        transform(items[mid].m_title.begin(),items[mid].m_title.end(),compare.begin(),::tolower);
+
+//        if(compare.compare(name) == 0){
+//            display(items[mid]);
+//            return;
+//        }
+//        else if(name.compare(compare) < 0)
+//            last = mid - 1;
+//        else
+//            first = mid + 1;
+
+//        if(first > last)
+//            break;
+
+//        mid = (first + last)/2;
+//    }
+//    /****/
+
 
     cout << "\nMovie Not Found. Displaying similar results:\n" << endl;
 
