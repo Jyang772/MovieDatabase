@@ -7,9 +7,11 @@
 
 //#define DEBUG
 
-SortedMovieList::SortedMovieList() : size(0){}
+template<class ListItemType>
+SortedMovieList<ListItemType>::SortedMovieList() : size(0){}
 
-bool SortedMovieList::isEmpty() const{
+template<class ListItemType>
+bool SortedMovieList<ListItemType>::isEmpty() const{
     // Determines whether a list is empty.
     // Precondition: None.
     // Postcondition: Returns true if the list is empty;
@@ -19,7 +21,8 @@ bool SortedMovieList::isEmpty() const{
     return(size == 0 ? 1 : 0);
 }
 
-int SortedMovieList::getLength() const{
+template<class ListItemType>
+int SortedMovieList<ListItemType>::getLength() const{
 
         // Determines the length of a list.
         // Precondition: None.
@@ -28,7 +31,8 @@ int SortedMovieList::getLength() const{
     return size;
 }
 
-bool SortedMovieList::remove(int index){
+template<class ListItemType>
+bool SortedMovieList<ListItemType>::remove(int index){
 
     for(int i=index; i<size;i++)
         items[i] = items[i+1];
@@ -37,8 +41,8 @@ bool SortedMovieList::remove(int index){
     return true;
 
 }
-
-bool SortedMovieList::insert(int index, ListItemType newItem){
+template<class ListItemType>
+bool SortedMovieList<ListItemType>::insert(int index, ListItemType newItem){
         // Inserts an item into the list at position index.
         // Precondition: index indicates the position at which
         // the item should be inserted in the list.
@@ -65,7 +69,8 @@ bool SortedMovieList::insert(int index, ListItemType newItem){
     return true;  //Operation was a success.
 }
 
-bool SortedMovieList::add(const ListItemType &newItem){
+template<class ListItemType>
+bool SortedMovieList<ListItemType>::add(const ListItemType &newItem){
     //Insert MovieType structure last
 
     if(size == MAX_LIST)
@@ -104,13 +109,15 @@ bool SortedMovieList::add(const ListItemType &newItem){
     return true;
 }
 
-void SortedMovieList::display() const {
+template<class ListItemType>
+void SortedMovieList<ListItemType>::display() const {
 
     for(int i=0; i<size;i++)
         cout << items[i].m_title << endl;
 }
 
-bool SortedMovieList::retrieve(int index, ListItemType &dataItem) const{
+template<class ListItemType>
+bool SortedMovieList<ListItemType>::retrieve(int index, ListItemType &dataItem) const{
 
     if( index < 0 || index >= size )
         return false;  // bad index
@@ -123,7 +130,8 @@ bool SortedMovieList::retrieve(int index, ListItemType &dataItem) const{
 
 
 //Overloaded functions
-void SortedMovieList::remove(string name){
+template<class ListItemType>
+void SortedMovieList<ListItemType>::remove(string name){
 
     for(int i=0; i<size;i++){
         string compare;
@@ -170,8 +178,8 @@ void SortedMovieList::remove(string name){
 
 }
 
-
-void SortedMovieList::retrieve(string name) const{
+template<class ListItemType>
+void SortedMovieList<ListItemType>::retrieve(string name) const{
         // Retrieves a list item by position.
        // Precondition: index is the number of the item to
        // be retrieved.
@@ -251,7 +259,8 @@ void SortedMovieList::retrieve(string name) const{
 }
 
 
-void SortedMovieList::display(const ListItemType &dataItem) const{
+template<class ListItemType>
+void SortedMovieList<ListItemType>::display(const ListItemType &dataItem) const{
 
     cout << "Movie: " << dataItem.m_title << endl;
     cout << "Year: " << dataItem.m_year << endl;
@@ -259,3 +268,7 @@ void SortedMovieList::display(const ListItemType &dataItem) const{
     cout << "Studio: " << dataItem.m_studio << endl;
     cout << "Stars: " << dataItem.m_stars << endl;
 }
+
+
+template class SortedMovieList<MovieType>;
+

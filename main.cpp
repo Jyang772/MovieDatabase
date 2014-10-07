@@ -19,7 +19,7 @@ int main()
     bool quit = false;
     int choice;
 
-    SortedMovieList dataBank;
+    SortedMovieList<MovieType> dataBank;
     MovieType Test;
     MovieType Test2,Test3,Test4;
 

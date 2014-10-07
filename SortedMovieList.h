@@ -3,9 +3,10 @@
 
 #include "MovieType.h"
 const int MAX_LIST = 20;
-typedef MovieType ListItemType;
+//typedef MovieType ListItemType;
 
 
+template<class ListItemType>
 class SortedMovieList{
 public:
     SortedMovieList();
