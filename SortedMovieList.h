@@ -5,6 +5,8 @@
 const int MAX_LIST = 20;
 //typedef MovieType ListItemType;
 
+using namespace std;
+
 
 template<class ListItemType>
 class SortedMovieList{

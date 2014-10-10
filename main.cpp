@@ -6,11 +6,6 @@
 #include "fstream"
 
 
-
-using namespace std;
-
-
-
 int main()
 {
     ifstream file;
@@ -19,16 +14,10 @@ int main()
     bool quit = false;
     int choice;
 
+
+
     SortedMovieList<MovieType> dataBank;
     MovieType Test;
-    MovieType Test2,Test3,Test4;
-
-    Test3.m_title = "ABC";
-    Test4.m_title = "abZebra";
-
-    dataBank.add(Test3);
-    dataBank.add(Test4);
-
 
     int max = 20;
     MovieType temp;
@@ -44,7 +33,7 @@ int main()
     cout << "------------------------------" << endl;
     cout << "Movie Database" << endl;
     cout << "------------------------------" << endl;
-    cout << "[1] View" << endl;
+    cout << "[1] View All" << endl;
     cout << "[2] Search" << endl;
     cout << "[3] Delete" << endl;
     cout << "[4] Add" << endl;
@@ -65,7 +54,6 @@ int main()
         string input;
         cout << "Enter movie title: ";
         getline(cin,input);
-       // cin >> input;
         dataBank.retrieve(input);
         break;
     }
@@ -73,7 +61,7 @@ int main()
     {
         string input;
         cout << "Enter movie title: ";
-        cin >> input;
+        getline(cin,input);
         dataBank.remove(input);
         cout << input << " has been removed." << endl;
         break;
@@ -83,9 +71,7 @@ int main()
 
 
         }
-
-    //cin.ignore();
-    //cin.get();
+    cin.get();
     }while(!quit);
 
 }

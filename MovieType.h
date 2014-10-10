@@ -4,8 +4,8 @@
 #include <string>
 #include <iostream>
 #include "fstream"
-using namespace std;
 
+using namespace std;
 
 class MovieType{
 public:

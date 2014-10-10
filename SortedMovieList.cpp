@@ -17,17 +17,16 @@ bool SortedMovieList<ListItemType>::isEmpty() const{
     // Postcondition: Returns true if the list is empty;
     // otherwise returns false.
 
-
     return(size == 0 ? 1 : 0);
 }
 
 template<class ListItemType>
 int SortedMovieList<ListItemType>::getLength() const{
 
-        // Determines the length of a list.
-        // Precondition: None.
-        // Postcondition: Returns the number of items
-        // that are currently in the list.
+    // Determines the length of a list.
+    // Precondition: None.
+    // Postcondition: Returns the number of items
+    // that are currently in the list.
     return size;
 }
 
@@ -43,15 +42,15 @@ bool SortedMovieList<ListItemType>::remove(int index){
 }
 template<class ListItemType>
 bool SortedMovieList<ListItemType>::insert(int index, ListItemType newItem){
-        // Inserts an item into the list at position index.
-        // Precondition: index indicates the position at which
-        // the item should be inserted in the list.
-        // Postcondition: If insertion is successful, newItem is
-        // at position index in the list, and other items are
-        // renumbered accordingly, and true is returned;
-        // otherwise false is returned.
-        // Note: Insertion will not be successful if
-        // index < 0 or index > getLength().
+    // Inserts an item into the list at position index.
+    // Precondition: index indicates the position at which
+    // the item should be inserted in the list.
+    // Postcondition: If insertion is successful, newItem is
+    // at position index in the list, and other items are
+    // renumbered accordingly, and true is returned;
+    // otherwise false is returned.
+    // Note: Insertion will not be successful if
+    // index < 0 or index > getLength().
 
 
     //Insert MovieType structure into list
@@ -76,27 +75,19 @@ bool SortedMovieList<ListItemType>::add(const ListItemType &newItem){
     if(size == MAX_LIST)
         return false;
 
-    string newTitle = newItem.m_title;
-    string strCmp; //For comparing titles;
-    int index = 0;
+    int index = size; //Set to last if item is bigger than rest
     bool done = false;
 
 
-    for(int i=0; i<size;i++){
-
-        //        if(items[i].compareKeys(newItem) > 0 && (i==0)){
-        //            index = 0;
-        //            cout << "newItem1: " << newItem.m_title << endl;
-        //        }
-        if(items[i].compareKeys(newItem) > 0){
+    for(int i=0; i<size;i++)
+    {
+        if(items[i].compareKeys(newItem) > 0)
+        {
             index = i;
             break;
         }
-        else if(items[i].compareKeys(newItem) < 0){
-            index = i+1;
-        }
-
     }
+
     insert(index,newItem);
 
 
@@ -142,50 +133,19 @@ void SortedMovieList<ListItemType>::remove(string name){
         if(compare.compare(name) == 0)
         {
             remove(i);
-            break;
+            return;
         }
     }
-
-    //        /*****/
-    //        /*Binary Search*/
-
-    //        cout << "size: " << size << endl;
-    //        int mid = size/2;
-    //        int first = 0, last = size;
-    //        string compare;
-
-    //        while(true){
-
-    //            compare.resize(items[mid].m_title.length());
-    //            transform(items[mid].m_title.begin(),items[mid].m_title.end(),compare.begin(),::tolower);
-
-    //            if(compare.compare(name) == 0){
-    //                display(items[mid]);
-    //                remove(mid);
-    //                return;
-    //            }
-    //            else if(name.compare(compare) < 0)
-    //                last = mid - 1;
-    //            else
-    //                first = mid + 1;
-
-    //            if(first > last)
-    //                break;
-
-    //            mid = (first + last)/2;
-    //        }
-    //        /****/
-
 }
 
 template<class ListItemType>
 void SortedMovieList<ListItemType>::retrieve(string name) const{
-        // Retrieves a list item by position.
-       // Precondition: index is the number of the item to
-       // be retrieved.
-       // Postcondition: If 0 <= index < getLength(),
-       // dataItem is the value of the desired item and
-       // true is returned; otherwise false is returned.
+    // Retrieves a list item by position.
+    // Precondition: index is the number of the item to
+    // be retrieved.
+    // Postcondition: If 0 <= index < getLength(),
+    // dataItem is the value of the desired item and
+    // true is returned; otherwise false is returned.
 
 
     string compare;
@@ -204,36 +164,6 @@ void SortedMovieList<ListItemType>::retrieve(string name) const{
             return;
         }
     }
-
-
-    //    /*****/
-    //    /*Binary Search*/
-
-    //    cout << "size: " << size << endl;
-    //    int mid = size/2;
-    //    int first = 0, last = size;
-
-    //    while(true){
-
-    //        compare.resize(items[mid].m_title.length());
-    //        transform(items[mid].m_title.begin(),items[mid].m_title.end(),compare.begin(),::tolower);
-
-    //        if(compare.compare(name) == 0){
-    //            display(items[mid]);
-    //            return;
-    //        }
-    //        else if(name.compare(compare) < 0)
-    //            last = mid - 1;
-    //        else
-    //            first = mid + 1;
-
-    //        if(first > last)
-    //            break;
-
-    //        mid = (first + last)/2;
-    //    }
-    //    /****/
-
 
     cout << "\nMovie Not Found. Displaying similar results:\n" << endl;
 
@@ -272,3 +202,65 @@ void SortedMovieList<ListItemType>::display(const ListItemType &dataItem) const{
 
 template class SortedMovieList<MovieType>;
 
+
+
+
+
+//        /*****/
+//        /*Binary Search*/
+
+//        cout << "size: " << size << endl;
+//        int mid = size/2;
+//        int first = 0, last = size;
+//        string compare;
+
+//        while(true){
+
+//            compare.resize(items[mid].m_title.length());
+//            transform(items[mid].m_title.begin(),items[mid].m_title.end(),compare.begin(),::tolower);
+
+//            if(compare.compare(name) == 0){
+//                display(items[mid]);
+//                remove(mid);
+//                return;
+//            }
+//            else if(name.compare(compare) < 0)
+//                last = mid - 1;
+//            else
+//                first = mid + 1;
+
+//            if(first > last)
+//                break;
+
+//            mid = (first + last)/2;
+//        }
+//        /****/
+
+
+//    /*****/
+//    /*Binary Search*/
+
+//    cout << "size: " << size << endl;
+//    int mid = size/2;
+//    int first = 0, last = size;
+
+//    while(true){
+
+//        compare.resize(items[mid].m_title.length());
+//        transform(items[mid].m_title.begin(),items[mid].m_title.end(),compare.begin(),::tolower);
+
+//        if(compare.compare(name) == 0){
+//            display(items[mid]);
+//            return;
+//        }
+//        else if(name.compare(compare) < 0)
+//            last = mid - 1;
+//        else
+//            first = mid + 1;
+
+//        if(first > last)
+//            break;
+
+//        mid = (first + last)/2;
+//    }
+//    /****/
