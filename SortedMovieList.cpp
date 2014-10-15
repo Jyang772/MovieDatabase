@@ -55,7 +55,7 @@ bool SortedMovieList<ListItemType>::insert(int index, ListItemType newItem){
 
     //Insert MovieType structure into list
 
-    if(size+1 > MAX_LIST || index < 0)
+    if(size == MAX_LIST || index < 0 || index > size )
         return false;
 
 
@@ -104,7 +104,15 @@ template<class ListItemType>
 void SortedMovieList<ListItemType>::display() const {
 
     for(int i=0; i<size;i++)
-        cout << items[i].m_title << endl;
+    {
+        cout << "Movie: " << items[i].m_title << "\n";
+        cout << "Year: " << items[i].m_year << "\n";
+        cout << "Receipt: $ " << items[i].m_receipts << "\n";
+        cout << "Studio: " << items[i].m_studio << "\n";
+        cout << "Stars: " << items[i].m_stars << "\n";
+        cout << endl;
+
+    }
 }
 
 template<class ListItemType>
@@ -121,6 +129,27 @@ bool SortedMovieList<ListItemType>::retrieve(int index, ListItemType &dataItem) 
 
 
 //Overloaded functions
+
+template<class ListItemType>
+void SortedMovieList<ListItemType>::add(){
+
+    ListItemType temp;
+
+    cout << "Movie Title: ";
+    getline(cin,temp.m_title);
+    cout << "Studio: ";
+    getline(cin,temp.m_studio);
+    cout << "Year: ";
+    getline(cin,temp.m_year);
+    cout << "Gross receipt: ";
+    getline(cin,temp.m_receipts);
+    cout << "Stars: ";
+    getline(cin,temp.m_stars);
+
+
+    add(temp);
+}
+
 template<class ListItemType>
 void SortedMovieList<ListItemType>::remove(string name){
 
@@ -150,6 +179,7 @@ void SortedMovieList<ListItemType>::retrieve(string name) const{
 
     string compare;
     unsigned int match = 0;
+    int matches = 0;
 
     transform(name.begin(),name.end(),name.begin(),::tolower);
 
@@ -157,7 +187,6 @@ void SortedMovieList<ListItemType>::retrieve(string name) const{
     {
         compare.resize(items[i].m_title.length());
         transform(items[i].m_title.begin(),items[i].m_title.end(),compare.begin(),::tolower);
-        cout << "compare: " << compare << endl;
 
         if(compare.compare(name) == 0){
             display(items[i]);
@@ -178,19 +207,29 @@ void SortedMovieList<ListItemType>::retrieve(string name) const{
                     match = 0;
             }
             if(match == name.length()){
+                ++matches;
                 display(items[i]);
                 break;}
             else if(match == name.length()/2){
+                ++matches;
                 display(items[i]);
                 break;}
         }
     }
+
+    if(matches == 0)
+        cout << "0 similar movies found.\n\n";
 
 }
 
 
 template<class ListItemType>
 void SortedMovieList<ListItemType>::display(const ListItemType &dataItem) const{
+
+    /*Precondition: None.
+     * Postcondition: Displays all info about a movie.
+     *
+    */
 
     cout << "Movie: " << dataItem.m_title << endl;
     cout << "Year: " << dataItem.m_year << endl;

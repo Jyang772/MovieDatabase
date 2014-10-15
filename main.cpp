@@ -17,61 +17,68 @@ int main()
 
 
     SortedMovieList<MovieType> dataBank;
-    MovieType Test;
 
     int max = 20;
-    MovieType temp;
     MovieType a[max];
     int i=0;
     while((i<max) && a[i].ReadOneMovieFromFile(file)){
         dataBank.add(a[i]);
         i++;
-
     }
 
     do{
-    cout << "------------------------------" << endl;
-    cout << "Movie Database" << endl;
-    cout << "------------------------------" << endl;
-    cout << "[1] View All" << endl;
-    cout << "[2] Search" << endl;
-    cout << "[3] Delete" << endl;
-    cout << "[4] Add" << endl;
-    cout << "[5] Count" << endl;
-    cout << "[6] Quit" << endl;
-    cin >> choice;
-    cin.ignore(50,'\n');
+        cout << "------------------------------" << endl;
+        cout << "Movie Database" << endl;
+        cout << "------------------------------" << endl;
+        cout << "[1] View All" << endl;
+        cout << "[2] Search" << endl;
+        cout << "[3] Delete" << endl;
+        cout << "[4] Add" << endl;
+        cout << "[5] Count" << endl;
+        cout << "[6] Quit" << endl;
+        cin >> choice;
+        cin.ignore(50,'\n');
 
-    switch(choice){
-    //skips here. No declare variable lawuawlawl
-    case 1:
-    {
+        switch(choice){
+        //skips here. No declare variable lawuawlawl
+        case 1:
+        {
             dataBank.display();
+            cin.get();
             break;
-    }
-    case 2:
-    {
-        string input;
-        cout << "Enter movie title: ";
-        getline(cin,input);
-        dataBank.retrieve(input);
-        break;
-    }
-    case 3:
-    {
-        string input;
-        cout << "Enter movie title: ";
-        getline(cin,input);
-        dataBank.remove(input);
-        cout << input << " has been removed." << endl;
-        break;
-    }
-    case 6:
-        quit = true;
-
-
         }
-    cin.get();
+        case 2:
+        {
+            string input;
+            cout << "Enter movie title: ";
+            getline(cin,input);
+            dataBank.retrieve(input);
+            break;
+        }
+        case 3:
+        {
+            string input;
+            cout << "Enter movie title: ";
+            getline(cin,input);
+            dataBank.remove(input);
+            cout << input << " has been removed." << endl;
+            cin.get();
+            break;
+        }
+        case 4:
+        {
+            dataBank.add();
+            break;
+        }
+        case 5:
+        {
+            cout << "Number of movies: " << dataBank.getLength();
+            cin.get();
+            break;
+        }
+        case 6:
+            quit = true;
+        }
     }while(!quit);
 
 }
