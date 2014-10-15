@@ -17,15 +17,15 @@ public:
     bool isEmpty() const;
     int getLength() const;
     bool insert(int index, ListItemType newItem);
-    bool add(const ListItemType& newItem);
-    bool remove(int index);
-    bool retrieve(int index, ListItemType& dataItem);
-    void display() ;
 
-    void add();
+    bool add();
+    void add(const ListItemType& newItem); //For adding from file AND user input
+
     int find(string name);
     bool remove(string name);
     void retrieve(string name);
+
+    void display();
     void display(ListItemType& dataItem);
 
 private:

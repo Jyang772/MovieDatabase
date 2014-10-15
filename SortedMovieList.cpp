@@ -20,7 +20,6 @@ bool SortedMovieList::isEmpty() const{
     return(size == 0 ? 1 : 0);
 }
 
-
 int SortedMovieList::getLength() const{
 
     // Determines the length of a list.
@@ -28,39 +27,6 @@ int SortedMovieList::getLength() const{
     // Postcondition: Returns the number of items
     // that are currently in the list.
     return size;
-}
-
-int SortedMovieList::find(string name) {
-
-    string compare;
-
-    transform(name.begin(),name.end(),name.begin(),::tolower);
-
-    for(int i=0; i<size;i++)
-    {
-        // compare.resize(items[i].m_title.length());
-        //transform(items[i].m_title.begin(),items[i].m_title.end(),compare.begin(),::tolower);
-
-        //        if(compare.compare(name) == 0){
-        //            return i;
-        //        }
-
-        if(items[i].compareKeys(name) == 0)
-          return i;
-    }
-
-    return 0;
-
-}
-
-bool SortedMovieList::remove(int index){
-
-    for(int i=index; i<size;i++)
-        items[i] = items[i+1];
-    --size;
-
-    return true;
-
 }
 
 bool SortedMovieList::insert(int index, ListItemType newItem){
@@ -91,11 +57,40 @@ bool SortedMovieList::insert(int index, ListItemType newItem){
 }
 
 
-bool SortedMovieList::add(const ListItemType &newItem){
-    //Insert MovieType structure last
+
+
+
+bool SortedMovieList::add(){
 
     if(size == MAX_LIST)
         return false;
+
+
+    string title,studio,stars;
+    int year,receipt;
+    cout << "Movie title: ";
+    getline(cin,title);
+    cout << "Studio: ";
+    getline(cin,studio);
+    cout << "Year: ";
+    cin >> year;
+    cout << "Gross receipts: ";
+    cin >> receipt;
+    cin.ignore(50,'\n');
+    cout << "Stars: ";
+    getline(cin,stars);
+
+    ListItemType temp;
+    temp.Initialize(title,year,receipt,studio,stars);
+
+    add(temp);
+
+    return true;
+
+}
+
+void SortedMovieList::add(const ListItemType &newItem){
+    //Insert MovieType structure last
 
     int index = size; //Set to last if item is bigger than rest
     bool done = false;
@@ -118,76 +113,47 @@ bool SortedMovieList::add(const ListItemType &newItem){
     cout << "size: " << size << endl;
     cout << "-----" << endl;
 #endif
-
-    return true;
 }
 
 
-void SortedMovieList::display(){
+int SortedMovieList::find(string name) {
+
+    transform(name.begin(),name.end(),name.begin(),::tolower);
 
     for(int i=0; i<size;i++)
     {
-        display(items[i]);
-        cout << endl;
 
+        if(items[i].compareKeys(name) == 0)
+            return i;
     }
-}
 
-
-bool SortedMovieList::retrieve(int index, ListItemType &dataItem) {
-
-    if( index < 0 || index >= size )
-        return false;  // bad index
-
-    dataItem = items[index];
-
-    return true;
+    return 0;
 
 }
-
-
-//Overloaded functions
-
-
-void SortedMovieList::add(){
-
-    string title,studio,stars;
-    int year,receipt;
-    cout << "Movie title: ";
-    getline(cin,title);
-    cout << "Studio: ";
-    getline(cin,studio);
-    cout << "Year: ";
-    cin >> year;
-    cout << "Gross receipts: ";
-    cin >> receipt;
-    cin.ignore(50,'\n');
-    cout << "Stars: ";
-    getline(cin,stars);
-
-    ListItemType temp;
-            temp.Initialize(title,year,receipt,studio,stars);
-
-    add(temp);
-
-}
-
 
 bool SortedMovieList::remove(string name){
+    /*Precondition: Takes movie title in string
+     * Postcondition: Removes movie if found.
+     * Calls find() which returns index if found. Then calls remove(int index).
+     * */
 
     int index = find(name);
 
     if(index)
     {
-        remove(index);
-        return true;
+        //remove(index);
+
+
+        for(int i=index; i<size;i++)
+            items[i] = items[i+1];
+        --size;
+            return true;
     }
 
     cout << "Movie not found.\n\n";
     return false;
 
 }
-
 
 void SortedMovieList::retrieve(string name){
     // Retrieves a list item by position.
@@ -198,8 +164,8 @@ void SortedMovieList::retrieve(string name){
     // true is returned; otherwise false is returned.
 
 
-    int index = -1, matches = 0;
-
+    int matches = 0;
+    int index = -1;
     index = find(name);
 
     if(index){
@@ -208,24 +174,36 @@ void SortedMovieList::retrieve(string name){
     }
 
     cout << "\nMovie Not Found.\n\n";
-
     cout << "Displaying similar results: " << endl;
 
-        for(int i=0; i<size;i++){
+    for(int i=0; i<size;i++){
 
-            if(items[i].findRelated(name)){
-                ++matches;
-                display(items[i]);
-            }
+        if(items[i].findRelated(name)){
+            ++matches;
+            display(items[i]);
         }
+    }
 
-            if(matches == 0)
-                cout << "0 results found.\n\n";
+    if(matches == 0)
+        cout << "0 results found.\n\n";
 
 
 }
 
 
+
+
+//Displaying Movies operations
+void SortedMovieList::display(){
+    //Displays all movies
+
+    for(int i=0; i<size;i++)
+    {
+        display(items[i]);
+        cout << endl;
+
+    }
+}
 
 void SortedMovieList::display(ListItemType &dataItem) {
 
@@ -240,6 +218,7 @@ void SortedMovieList::display(ListItemType &dataItem) {
 
 
 //template class SortedMovieList<MovieType>;
+
 
 
 

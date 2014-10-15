@@ -67,7 +67,10 @@ int main()
         }
         case 4:
         {
-            dataBank.add();
+            if(dataBank.add())
+                cout << "Movie added successfully.\n";
+            else
+                cout << "Error! Database full.\n";
             break;
         }
         case 5:
