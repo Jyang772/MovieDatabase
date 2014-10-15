@@ -16,7 +16,7 @@ int main()
 
 
 
-    SortedMovieList<MovieType> dataBank;
+    SortedMovieList dataBank;
 
     int max = 20;
     MovieType a[max];
@@ -60,8 +60,8 @@ int main()
             string input;
             cout << "Enter movie title: ";
             getline(cin,input);
-            dataBank.remove(input);
-            cout << input << " has been removed." << endl;
+            if(dataBank.remove(input))
+                cout << input << " has been removed.\n";
             cin.get();
             break;
         }

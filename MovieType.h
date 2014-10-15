@@ -9,15 +9,17 @@ using namespace std;
 
 class MovieType{
 public:
-    void Initialize(string, string, string, string, string);
+    void Initialize(string, int, int, string, string);
     int compareKeys(const MovieType& p2);
+    int compareKeys(string);
     bool ReadOneMovieFromFile(ifstream&);
     void Display();
+    bool findRelated(string&);
 
-//private:
+private:
     string m_title; //key
-    string m_year;
-    string m_receipts;
+    int m_year;
+    int m_receipts;
     string m_studio;
     string m_stars;
 

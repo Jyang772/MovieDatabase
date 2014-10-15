@@ -1,5 +1,6 @@
 #include "SortedMovieList.h"
-#include "algorithm"
+#include <algorithm>
+#include <iomanip>
 
 #ifndef max
 #define max(x,y) ((x) > (y) ? (x) : (y))
@@ -7,11 +8,10 @@
 
 //#define DEBUG
 
-template<class ListItemType>
-SortedMovieList<ListItemType>::SortedMovieList() : size(0){}
+SortedMovieList::SortedMovieList() : size(0){}
 
-template<class ListItemType>
-bool SortedMovieList<ListItemType>::isEmpty() const{
+
+bool SortedMovieList::isEmpty() const{
     // Determines whether a list is empty.
     // Precondition: None.
     // Postcondition: Returns true if the list is empty;
@@ -20,8 +20,8 @@ bool SortedMovieList<ListItemType>::isEmpty() const{
     return(size == 0 ? 1 : 0);
 }
 
-template<class ListItemType>
-int SortedMovieList<ListItemType>::getLength() const{
+
+int SortedMovieList::getLength() const{
 
     // Determines the length of a list.
     // Precondition: None.
@@ -30,18 +30,40 @@ int SortedMovieList<ListItemType>::getLength() const{
     return size;
 }
 
-template<class ListItemType>
-bool SortedMovieList<ListItemType>::remove(int index){
+int SortedMovieList::find(string name) {
+
+    string compare;
+
+    transform(name.begin(),name.end(),name.begin(),::tolower);
+
+    for(int i=0; i<size;i++)
+    {
+        // compare.resize(items[i].m_title.length());
+        //transform(items[i].m_title.begin(),items[i].m_title.end(),compare.begin(),::tolower);
+
+        //        if(compare.compare(name) == 0){
+        //            return i;
+        //        }
+
+        if(items[i].compareKeys(name) == 0)
+          return i;
+    }
+
+    return 0;
+
+}
+
+bool SortedMovieList::remove(int index){
 
     for(int i=index; i<size;i++)
         items[i] = items[i+1];
-
     --size;
+
     return true;
 
 }
-template<class ListItemType>
-bool SortedMovieList<ListItemType>::insert(int index, ListItemType newItem){
+
+bool SortedMovieList::insert(int index, ListItemType newItem){
     // Inserts an item into the list at position index.
     // Precondition: index indicates the position at which
     // the item should be inserted in the list.
@@ -68,8 +90,8 @@ bool SortedMovieList<ListItemType>::insert(int index, ListItemType newItem){
     return true;  //Operation was a success.
 }
 
-template<class ListItemType>
-bool SortedMovieList<ListItemType>::add(const ListItemType &newItem){
+
+bool SortedMovieList::add(const ListItemType &newItem){
     //Insert MovieType structure last
 
     if(size == MAX_LIST)
@@ -100,23 +122,19 @@ bool SortedMovieList<ListItemType>::add(const ListItemType &newItem){
     return true;
 }
 
-template<class ListItemType>
-void SortedMovieList<ListItemType>::display() const {
+
+void SortedMovieList::display(){
 
     for(int i=0; i<size;i++)
     {
-        cout << "Movie: " << items[i].m_title << "\n";
-        cout << "Year: " << items[i].m_year << "\n";
-        cout << "Receipt: $ " << items[i].m_receipts << "\n";
-        cout << "Studio: " << items[i].m_studio << "\n";
-        cout << "Stars: " << items[i].m_stars << "\n";
+        display(items[i]);
         cout << endl;
 
     }
 }
 
-template<class ListItemType>
-bool SortedMovieList<ListItemType>::retrieve(int index, ListItemType &dataItem) const{
+
+bool SortedMovieList::retrieve(int index, ListItemType &dataItem) {
 
     if( index < 0 || index >= size )
         return false;  // bad index
@@ -130,45 +148,48 @@ bool SortedMovieList<ListItemType>::retrieve(int index, ListItemType &dataItem) 
 
 //Overloaded functions
 
-template<class ListItemType>
-void SortedMovieList<ListItemType>::add(){
+
+void SortedMovieList::add(){
+
+    string title,studio,stars;
+    int year,receipt;
+    cout << "Movie title: ";
+    getline(cin,title);
+    cout << "Studio: ";
+    getline(cin,studio);
+    cout << "Year: ";
+    cin >> year;
+    cout << "Gross receipts: ";
+    cin >> receipt;
+    cin.ignore(50,'\n');
+    cout << "Stars: ";
+    getline(cin,stars);
 
     ListItemType temp;
-
-    cout << "Movie Title: ";
-    getline(cin,temp.m_title);
-    cout << "Studio: ";
-    getline(cin,temp.m_studio);
-    cout << "Year: ";
-    getline(cin,temp.m_year);
-    cout << "Gross receipt: ";
-    getline(cin,temp.m_receipts);
-    cout << "Stars: ";
-    getline(cin,temp.m_stars);
-
+            temp.Initialize(title,year,receipt,studio,stars);
 
     add(temp);
+
 }
 
-template<class ListItemType>
-void SortedMovieList<ListItemType>::remove(string name){
 
-    for(int i=0; i<size;i++){
-        string compare;
-        compare.resize(items[i].m_title.length());
-        transform(items[i].m_title.begin(),items[i].m_title.end(),compare.begin(),::tolower);
-        transform(name.begin(),name.end(),name.begin(),::tolower);
+bool SortedMovieList::remove(string name){
 
-        if(compare.compare(name) == 0)
-        {
-            remove(i);
-            return;
-        }
+    int index = find(name);
+
+    if(index)
+    {
+        remove(index);
+        return true;
     }
+
+    cout << "Movie not found.\n\n";
+    return false;
+
 }
 
-template<class ListItemType>
-void SortedMovieList<ListItemType>::retrieve(string name) const{
+
+void SortedMovieList::retrieve(string name){
     // Retrieves a list item by position.
     // Precondition: index is the number of the item to
     // be retrieved.
@@ -177,69 +198,48 @@ void SortedMovieList<ListItemType>::retrieve(string name) const{
     // true is returned; otherwise false is returned.
 
 
-    string compare;
-    unsigned int match = 0;
-    int matches = 0;
+    int index = -1, matches = 0;
 
-    transform(name.begin(),name.end(),name.begin(),::tolower);
+    index = find(name);
 
-    for(int i=0; i<size;i++)
-    {
-        compare.resize(items[i].m_title.length());
-        transform(items[i].m_title.begin(),items[i].m_title.end(),compare.begin(),::tolower);
-
-        if(compare.compare(name) == 0){
-            display(items[i]);
-            return;
-        }
+    if(index){
+        display(items[index]);
+        return;
     }
 
-    cout << "\nMovie Not Found. Displaying similar results:\n" << endl;
+    cout << "\nMovie Not Found.\n\n";
 
-    for(int i=0; i<size;i++){
-        for(unsigned int j=0; j<items[i].m_title.length();j++){
-            if(tolower(items[i].m_title[j]) == tolower(name[match]))
-                match++;
-            else{
-                if(tolower(items[i].m_title[j]) == tolower(name[0]))
-                    match = 1;
-                else
-                    match = 0;
+    cout << "Displaying similar results: " << endl;
+
+        for(int i=0; i<size;i++){
+
+            if(items[i].findRelated(name)){
+                ++matches;
+                display(items[i]);
             }
-            if(match == name.length()){
-                ++matches;
-                display(items[i]);
-                break;}
-            else if(match == name.length()/2){
-                ++matches;
-                display(items[i]);
-                break;}
         }
-    }
 
-    if(matches == 0)
-        cout << "0 similar movies found.\n\n";
+            if(matches == 0)
+                cout << "0 results found.\n\n";
+
 
 }
 
 
-template<class ListItemType>
-void SortedMovieList<ListItemType>::display(const ListItemType &dataItem) const{
+
+void SortedMovieList::display(ListItemType &dataItem) {
 
     /*Precondition: None.
      * Postcondition: Displays all info about a movie.
      *
     */
 
-    cout << "Movie: " << dataItem.m_title << endl;
-    cout << "Year: " << dataItem.m_year << endl;
-    cout << "Receipt: $ " << dataItem.m_receipts << endl;
-    cout << "Studio: " << dataItem.m_studio << endl;
-    cout << "Stars: " << dataItem.m_stars << endl;
+    dataItem.Display();
+
 }
 
 
-template class SortedMovieList<MovieType>;
+//template class SortedMovieList<MovieType>;
 
 
 

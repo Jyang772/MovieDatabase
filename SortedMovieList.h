@@ -3,12 +3,14 @@
 
 #include "MovieType.h"
 const int MAX_LIST = 20;
-//typedef MovieType ListItemType;
+typedef MovieType ListItemType;
 
 using namespace std;
 
 
-template<class ListItemType>
+//template<class ListItemType>
+
+
 class SortedMovieList{
 public:
     SortedMovieList();
@@ -17,13 +19,14 @@ public:
     bool insert(int index, ListItemType newItem);
     bool add(const ListItemType& newItem);
     bool remove(int index);
-    bool retrieve(int index, ListItemType& dataItem) const;
-    void display() const;
+    bool retrieve(int index, ListItemType& dataItem);
+    void display() ;
 
     void add();
-    void remove(string name);
-    void retrieve(string name) const;
-    void display(const ListItemType& dataItem) const;
+    int find(string name);
+    bool remove(string name);
+    void retrieve(string name);
+    void display(ListItemType& dataItem);
 
 private:
     ListItemType items[MAX_LIST];
