@@ -150,7 +150,18 @@ bool SortedMovieList::remove(string name){
             return true;
     }
 
-    cout << "Movie not found.\n\n";
+    cout << "\nMovie Not Found.\n\n";
+    cout << "Displaying similar results: " << endl;
+
+    for(int i=0; i<size;i++){
+
+        if(items[i].findRelated(name)){
+            display(items[i]);
+        }
+    }
+
+
+    //cout << "Movie not found.\n\n";
     return false;
 
 }
