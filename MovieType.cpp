@@ -11,9 +11,11 @@ void MovieType::Initialize(string title, int year, int receipts, string studio, 
 }
 
 int MovieType::compareKeys(const MovieType &p2){
-    //return m_title == p2.m_title;
 
     //return(m_title.compare(p2.m_title));
+
+    //Doing it the "hard" way
+   // m_title.
 
         int length = m_title.length() > p2.m_title.length() ? m_title.length() : p2.m_title.length();        //Compare each character. Z > A. If greater than and index of original title == 0. Done. Otherwise continue.
         //Iterate through each character. If a character is greater than the other, return -1,0,1.
@@ -76,11 +78,14 @@ bool MovieType::ReadOneMovieFromFile(ifstream& file){
     getline(file,m_stars);
 
     if(m_stars != "")
-    m_stars = m_stars.substr(m_stars.find(",")+2);
+        m_stars = m_stars.substr(m_stars.find(",")+2);
 
 
     return true;
 }
+
+
+
 
 
 bool MovieType::findRelated(string & name)

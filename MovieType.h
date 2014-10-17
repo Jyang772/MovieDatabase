@@ -17,9 +17,9 @@ public:
     bool findRelated(string&);
 
 private:
-    string m_title; //key
     int m_year;
     int m_receipts;
+    string m_title; //key
     string m_studio;
     string m_stars;
 

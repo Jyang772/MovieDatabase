@@ -18,15 +18,15 @@ public:
     int getLength() const;
     bool insert(int index, ListItemType newItem);
 
-    bool add();
-    void add(const ListItemType& newItem); //For adding from file AND user input
+    bool add(const ListItemType& newItem); //For adding from file AND user input
 
-    int find(string name);
-    bool remove(string name);
-    void retrieve(string name);
+    int find(string name);                //Finds a movie in database, returns an index
+    bool remove(int index);             //Deletes movie from database
 
-    void display();
-    void display(ListItemType& dataItem);
+
+    void retrieve(int index, ListItemType& item);         //Retrieves item at index, returns it by reference in return
+
+    bool findRelated(string name);
 
 private:
     ListItemType items[MAX_LIST];

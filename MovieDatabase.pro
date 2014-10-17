@@ -5,9 +5,11 @@ CONFIG -= qt
 
 SOURCES += main.cpp \
     MovieType.cpp \
-    SortedMovieList.cpp
+    SortedMovieList.cpp \
+    Menu.cpp
 
 HEADERS += \
     SortedMovieList.h \
-    MovieType.h
+    MovieType.h \
+    Menu.h
 

@@ -1,23 +1,14 @@
-#include <iostream>
-#include <string>
+#include "Menu.h"
 #include "MovieType.h"
 #include "SortedMovieList.h"
 #include "algorithm"
 #include "fstream"
-
-
-int main()
-{
-    ifstream file;
-    file.open("Movies1.txt");
-
-    bool quit = false;
-    int choice;
+#include <iostream>
+#include <string>
 
 
 
-    SortedMovieList dataBank;
-
+void ReadAllFromFile(ifstream& file, SortedMovieList& dataBank){
     int max = 20;
     MovieType a[max];
     int i=0;
@@ -25,6 +16,22 @@ int main()
         dataBank.add(a[i]);
         i++;
     }
+
+}
+
+int main()
+{
+    ifstream file;
+    file.open("Movies1.txt");// open???
+
+    bool quit = false;
+    int choice;
+    string prompt = "Press [ENTER] to continue...\n";
+
+
+    SortedMovieList dataBank;
+    Menu menu(&dataBank);
+    ReadAllFromFile(file, dataBank);
 
     do{
         cout << "------------------------------" << endl;
@@ -36,51 +43,48 @@ int main()
         cout << "[4] Add" << endl;
         cout << "[5] Count" << endl;
         cout << "[6] Quit" << endl;
+
+
         cin >> choice;
         cin.ignore(50,'\n');
 
         switch(choice){
-        //skips here. No declare variable lawuawlawl
+        //skips here.
         case 1:
         {
-            dataBank.display();
-            cin.get();
+            menu.DisplayAllMovies(dataBank);
             break;
         }
         case 2:
         {
-            string input;
-            cout << "Enter movie title: ";
-            getline(cin,input);
-            dataBank.retrieve(input);
+            menu.SearchMovies(dataBank);
             break;
         }
         case 3:
         {
-            string input;
-            cout << "Enter movie title: ";
-            getline(cin,input);
-            if(dataBank.remove(input))
-                cout << input << " has been removed.\n";
-            cin.get();
+            menu.DeleteMovie(dataBank);
             break;
         }
         case 4:
         {
-            if(dataBank.add())
-                cout << "Movie added successfully.\n";
-            else
-                cout << "Error! Database full.\n";
+            menu.AddMovie(dataBank);
             break;
         }
         case 5:
         {
-            cout << "Number of movies: " << dataBank.getLength();
-            cin.get();
+            menu.CountMovies(dataBank);
             break;
         }
         case 6:
+        {
             quit = true;
+            break;
+        }
+        default:
+        {
+            cout << "Please enter a valid selection.\n";
+        }
+
         }
     }while(!quit);
 
