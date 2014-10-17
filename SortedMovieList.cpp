@@ -90,6 +90,7 @@ int SortedMovieList::find(string name) {
     //transform(name.begin(),name.end(),name.begin(),::tolower);
 
     cout << "name: " << name << endl;
+
     for(int i=0; i<size;i++)
     {
 
@@ -122,9 +123,6 @@ bool SortedMovieList::remove(int index){
 }
 
 
-
-//Displaying Movies operations
-
 void SortedMovieList::retrieve(int index, ListItemType& item){
     // Retrieves a list item by position.
     // Precondition: index is the number of the item to
@@ -136,6 +134,9 @@ void SortedMovieList::retrieve(int index, ListItemType& item){
 
 }
 
+
+
+//EXTRA PARTS
 
 bool SortedMovieList::findRelated(string name){
 
@@ -154,6 +155,39 @@ bool SortedMovieList::findRelated(string name){
 
     return true;
 }
+
+
+int SortedMovieList::binarySearch(string name){
+
+            /*****/
+            /*Binary Search*/
+
+            cout << "size: " << size << endl;
+            int mid = size/2;
+            int first = 0, last = size;
+
+            while(true){
+
+                if(items[mid].compareKeys(name) == 0){
+                    return mid;
+                }
+                else if(items[mid].compareKeys(name) > 0)   //If item name is greater than name at [mid]. Name must be before [mid]. Set last to [mid] - 1
+                    last = mid - 1;
+                else
+                    first = mid + 1;
+
+                if(first > last){
+                    break;
+                }
+
+                mid = (first + last)/2;
+            }
+
+           return -1;
+
+
+}
+
 
 
 //EXTRA PARTS
