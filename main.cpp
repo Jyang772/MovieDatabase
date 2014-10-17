@@ -24,13 +24,15 @@ int main()
     ifstream file;
     file.open("Movies1.txt");// open???
 
+    if(!file.is_open())
+        cout << "ERROR! FILE NOT FOUND!\n";
+
     bool quit = false;
     int choice;
-    string prompt = "Press [ENTER] to continue...\n";
 
 
     SortedMovieList dataBank;
-    Menu menu(&dataBank);
+    Menu menu(&dataBank); //Initialize this menu with a dataBank.
     ReadAllFromFile(file, dataBank);
 
     do{
@@ -52,27 +54,27 @@ int main()
         //skips here.
         case 1:
         {
-            menu.DisplayAllMovies(dataBank);
+            menu.DisplayAllMovies();
             break;
         }
         case 2:
         {
-            menu.SearchMovies(dataBank);
+            menu.SearchMovies();
             break;
         }
         case 3:
         {
-            menu.DeleteMovie(dataBank);
+            menu.DeleteMovie();
             break;
         }
         case 4:
         {
-            menu.AddMovie(dataBank);
+            menu.AddMovie();
             break;
         }
         case 5:
         {
-            menu.CountMovies(dataBank);
+            menu.CountMovies();
             break;
         }
         case 6:

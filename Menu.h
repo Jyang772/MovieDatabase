@@ -6,14 +6,16 @@
 class Menu{
 public:
     Menu(SortedMovieList*);
-    void DisplayAllMovies(SortedMovieList&);
-    void SearchMovies(SortedMovieList&);
-    void DeleteMovie(SortedMovieList&);
-    void AddMovie(SortedMovieList&);
-    void CountMovies(SortedMovieList&);
+    void DisplayAllMovies();
+
+    //void DisplayAllMovies();
+    void SearchMovies();
+    void DeleteMovie();
+    void AddMovie();
+    void CountMovies();
 
 private:
-    //SortedMovieList* DataBank;
+    SortedMovieList* DataBank;
     MovieType temp;
     string prompt;
 };
