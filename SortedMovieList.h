@@ -28,6 +28,7 @@ public:
     void retrieve(int index, ListItemType& item);         //Retrieves item at index, returns it by reference in return
 
     //Miscellaneous.
+    bool findWithStar(int index, string& star);
     bool findRelated(string name);
     int binarySearch(string name);
 

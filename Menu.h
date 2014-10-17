@@ -7,12 +7,17 @@ class Menu{
 public:
     Menu(SortedMovieList*);
     void DisplayAllMovies();
-
-    //void DisplayAllMovies();
     void SearchMovies();
     void DeleteMovie();
     void AddMovie();
     void CountMovies();
+
+
+
+    //Miscellaneous:
+    void MoviesWithStar();
+
+
 
 private:
     SortedMovieList* DataBank;

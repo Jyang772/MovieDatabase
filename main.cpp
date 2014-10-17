@@ -41,10 +41,11 @@ int main()
         cout << "------------------------------" << endl;
         cout << "[1] View All" << endl;
         cout << "[2] Search" << endl;
-        cout << "[3] Delete" << endl;
-        cout << "[4] Add" << endl;
-        cout << "[5] Count" << endl;
-        cout << "[6] Quit" << endl;
+        cout << "[3] Movies with Star" << endl;
+        cout << "[4] Delete" << endl;
+        cout << "[5] Add" << endl;
+        cout << "[6] Count" << endl;
+        cout << "[7] Quit" << endl;
 
 
         cin >> choice;
@@ -64,20 +65,25 @@ int main()
         }
         case 3:
         {
-            menu.DeleteMovie();
+            menu.MoviesWithStar();
             break;
         }
         case 4:
         {
-            menu.AddMovie();
+            menu.DeleteMovie();
             break;
         }
         case 5:
         {
-            menu.CountMovies();
+            menu.AddMovie();
             break;
         }
         case 6:
+        {
+            menu.CountMovies();
+            break;
+        }
+        case 7:
         {
             quit = true;
             break;

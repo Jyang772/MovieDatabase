@@ -87,9 +87,6 @@ bool SortedMovieList::add(const ListItemType &newItem){
 
 int SortedMovieList::find(string name) {
 
-    //transform(name.begin(),name.end(),name.begin(),::tolower);
-
-    cout << "name: " << name << endl;
 
     for(int i=0; i<size;i++)
     {
@@ -156,7 +153,6 @@ bool SortedMovieList::findRelated(string name){
     return true;
 }
 
-
 int SortedMovieList::binarySearch(string name){
 
             /*****/
@@ -188,7 +184,11 @@ int SortedMovieList::binarySearch(string name){
 
 }
 
+bool SortedMovieList::findWithStar(int index, string& star){
 
+    if(items[index].HasStar(star))
+        return true;
+}
 
 //EXTRA PARTS
 

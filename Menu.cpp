@@ -103,3 +103,25 @@ void Menu::CountMovies(){
     cout << prompt;
     cin.get();
 }
+
+
+//Miscellaneous:
+
+void Menu::MoviesWithStar()
+{
+    string star;
+    cout << "Enter Star's Name: ";
+    getline(cin,star);
+
+
+    for(int i=0; DataBank->getLength(); i++)
+    {
+        if(DataBank->findWithStar(i,star))
+        {
+            DataBank->retrieve(i,temp);
+            temp.Display();
+        }
+    }
+
+
+}

@@ -15,22 +15,22 @@ int MovieType::compareKeys(const MovieType &p2){
     //return(m_title.compare(p2.m_title));
 
     //Doing it the "hard" way
-   // m_title.
+    // m_title.
 
-        int length = m_title.length() > p2.m_title.length() ? m_title.length() : p2.m_title.length();        //Compare each character. Z > A. If greater than and index of original title == 0. Done. Otherwise continue.
-        //Iterate through each character. If a character is greater than the other, return -1,0,1.
-        //If is first character, exit loop and return value. Otherwise if same characters, continue thru until diff. character
-        //Use tolower because case must be same. Otherwise a > P ??? or A < a (a-P) == 17
-            for(int i=0; i<length;i++)
-            {
-                 if(tolower(m_title[i]) > tolower(p2.m_title[i])){
-                    return 1;
-                }
-                else if(tolower(m_title[i]) < tolower(p2.m_title[i])){
-                    return -1;
-                }
-            }
-            return 0;
+    int length = m_title.length() > p2.m_title.length() ? m_title.length() : p2.m_title.length();        //Compare each character. Z > A. If greater than and index of original title == 0. Done. Otherwise continue.
+    //Iterate through each character. If a character is greater than the other, return -1,0,1.
+    //If is first character, exit loop and return value. Otherwise if same characters, continue thru until diff. character
+    //Use tolower because case must be same. Otherwise a > P ??? or A < a (a-P) == 17
+    for(int i=0; i<length;i++)
+    {
+        if(tolower(m_title[i]) > tolower(p2.m_title[i])){
+            return 1;
+        }
+        else if(tolower(m_title[i]) < tolower(p2.m_title[i])){
+            return -1;
+        }
+    }
+    return 0;
 }
 
 int MovieType::compareKeys(string title){
@@ -39,16 +39,16 @@ int MovieType::compareKeys(string title){
     //Iterate through each character. If a character is greater than the other, return -1,0,1.
     //If is first character, exit loop and return value. Otherwise if same characters, continue thru until diff. character
     //Use tolower because case must be same. Otherwise a > P ??? or A < a (a-P) == 17
-        for(int i=0; i<length;i++)
-        {
-             if(tolower(m_title[i]) > tolower(title[i])){
-                return 1;
-            }
-            else if(tolower(m_title[i]) < tolower(title[i])){
-                return -1;
-            }
+    for(int i=0; i<length;i++)
+    {
+        if(tolower(m_title[i]) > tolower(title[i])){
+            return 1;
         }
-        return 0;
+        else if(tolower(m_title[i]) < tolower(title[i])){
+            return -1;
+        }
+    }
+    return 0;
 }
 
 void MovieType::Display(){
@@ -86,11 +86,11 @@ bool MovieType::ReadOneMovieFromFile(ifstream& file){
 
 
 
-
+//Miscellaneous:
 
 bool MovieType::findRelated(string & name)
 {
-    int match = 0;
+    unsigned int match = 0;
 
     for(unsigned int j=0; j<m_title.length();j++){
         if(tolower(m_title[j]) == tolower(name[match]))
@@ -110,4 +110,31 @@ bool MovieType::findRelated(string & name)
     }
 
     return false;
+}
+
+bool MovieType::HasStar(string& star){
+
+
+    unsigned int match = 0;
+
+    for(unsigned int j=0; j<m_stars.length();j++){
+        if(tolower(m_stars[j]) == tolower(star[match]))
+            match++;
+        else{
+            if(tolower(m_stars[j]) == tolower(star[0]))
+                match = 1;
+            else
+                match = 0;
+        }
+        if(match == star.length()){
+            return true;
+        }
+        else if(match == star.length()/2){
+            return true;
+        }
+    }
+
+
+    return false;
+    //return(int(m_stars.find(star)) != -1);
 }

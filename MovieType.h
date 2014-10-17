@@ -16,6 +16,9 @@ public:
     void Display();
     bool findRelated(string&);
 
+    //Miscellaneous
+    bool HasStar(string&);
+
 private:
     int m_year;
     int m_receipts;
