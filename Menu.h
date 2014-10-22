@@ -3,9 +3,10 @@
 
 #include "SortedMovieList.h"
 
+template <class ListItemType>
 class Menu{
 public:
-    Menu(SortedMovieList*);
+    Menu(SortedMovieList<ListItemType>*);
     void DisplayAllMovies();
     void SearchMovies();
     void DeleteMovie();
@@ -18,11 +19,11 @@ public:
     void MoviesWithStar();
 
 
-
 private:
-    SortedMovieList* DataBank;
+    SortedMovieList<ListItemType>* DataBank;
     //MovieType temp;//local var?
     string prompt;
 };
+
 
 #endif // MENU_H

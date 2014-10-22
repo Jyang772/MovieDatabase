@@ -8,17 +8,20 @@
 
 //#define DEBUG
 
-SortedMovieList::SortedMovieList() : size(0){
+template <class ListItemType>
+SortedMovieList<ListItemType>::SortedMovieList() : size(0){
 
     capacity = 10;
     items = new ListItemType[capacity];
 }
 
-SortedMovieList::~SortedMovieList(){
+template <class ListItemType>
+SortedMovieList<ListItemType>::~SortedMovieList(){
     delete [] items;
 }
 
-bool SortedMovieList::isEmpty() const{
+template <class ListItemType>
+bool SortedMovieList<ListItemType>::isEmpty() const{
     // Determines whether a list is empty.
     // Precondition: None.
     // Postcondition: Returns true if the list is empty;
@@ -27,7 +30,8 @@ bool SortedMovieList::isEmpty() const{
     return(size == 0 ? 1 : 0);
 }
 
-int SortedMovieList::getLength() const{
+template <class ListItemType>
+int SortedMovieList<ListItemType>::getLength() const{
 
     // Determines the length of a list.
     // Precondition: None.
@@ -36,7 +40,8 @@ int SortedMovieList::getLength() const{
     return size;
 }
 
-bool SortedMovieList::insert(int index, ListItemType newItem){
+template <class ListItemType>
+bool SortedMovieList<ListItemType>::insert(int index, ListItemType newItem){
     // Inserts an item into the list at position index.
     // Precondition: index indicates the position at which
     // the item should be inserted in the list.
@@ -63,7 +68,8 @@ bool SortedMovieList::insert(int index, ListItemType newItem){
     return true;  //Operation was a success.
 }
 
-bool SortedMovieList::add(const ListItemType &newItem){
+template <class ListItemType>
+bool SortedMovieList<ListItemType>::add(const ListItemType &newItem){
     //Insert MovieType structure last
 
 //    if(size == MAX_LIST)
@@ -95,7 +101,8 @@ bool SortedMovieList::add(const ListItemType &newItem){
     return true;
 }
 
-void SortedMovieList::grow(){
+template <class ListItemType>
+void SortedMovieList<ListItemType>::grow(){
 
     capacity *= 2;
 
@@ -110,7 +117,8 @@ void SortedMovieList::grow(){
 
 }
 
-int SortedMovieList::find(string name) {
+template <class ListItemType>
+int SortedMovieList<ListItemType>::find(string name) {
     //Precondition: string is valid.
     //Postcondition: returns index of movie with same title.
     //Iterates through list finding movie with same title. Return index if found,
@@ -128,7 +136,8 @@ int SortedMovieList::find(string name) {
 
 }
 
-bool SortedMovieList::remove(int index){
+template <class ListItemType>
+bool SortedMovieList<ListItemType>::remove(int index){
     /*Precondition: Takes movie index
      * Postcondition: Removes movie at index
      * Returns true if removed. Otherwise return false if index == -1
@@ -148,8 +157,8 @@ bool SortedMovieList::remove(int index){
 
 }
 
-
-void SortedMovieList::retrieve(int index, ListItemType& item){
+template <class ListItemType>
+void SortedMovieList<ListItemType>::retrieve(int index, ListItemType& item){
     // Retrieves a list item by position.
     // Precondition: index is the number of the item to
     // be retrieved.
@@ -164,7 +173,8 @@ void SortedMovieList::retrieve(int index, ListItemType& item){
 
 //EXTRA PARTS
 
-bool SortedMovieList::findRelated(string name){
+template <class ListItemType>
+bool SortedMovieList<ListItemType>::findRelated(string name){
 
     int matches = 0;
 
@@ -191,7 +201,8 @@ bool SortedMovieList::findRelated(string name){
     return true;
 }
 
-int SortedMovieList::binarySearch(string name){
+template <class ListItemType>
+int SortedMovieList<ListItemType>::binarySearch(string name){
 
             /*****/
             /*Binary Search*/
@@ -222,7 +233,8 @@ int SortedMovieList::binarySearch(string name){
 
 }
 
-bool SortedMovieList::findWithStar(int index, string& star){
+template <class ListItemType>
+bool SortedMovieList<ListItemType>::findWithStar(int index, string& star){
 
     if(items[index].HasStar(star))
         return true;
@@ -232,5 +244,6 @@ bool SortedMovieList::findWithStar(int index, string& star){
 
 
 
-//template class SortedMovieList<MovieType>;
+template class SortedMovieList<MovieType>; //Explicitly instantiate template class for MovieType
+
 

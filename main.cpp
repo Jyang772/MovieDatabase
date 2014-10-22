@@ -7,8 +7,8 @@
 #include <string>
 
 
-
-void ReadAllFromFile(ifstream& file, SortedMovieList& dataBank){
+template <class ListItemType>
+void ReadAllFromFile(ifstream& file, SortedMovieList<ListItemType>& dataBank){
     int max = 20;
     MovieType a[max];
     int i=0;
@@ -29,10 +29,9 @@ int main()
         cout << "ERROR! " << fileName << " NOT FOUND!\n";
 
 
-    SortedMovieList dataBank;
-    Menu menu(&dataBank); //Initialize this menu with a dataBank.
+    SortedMovieList<MovieType> dataBank;
+    Menu<MovieType> menu(&dataBank); //Initialize this menu with a dataBank.
     ReadAllFromFile(file, dataBank);
-
 
     bool quit = false;
     int choice;

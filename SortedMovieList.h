@@ -4,14 +4,12 @@
 #include "MovieType.h"
 #include <stack>
 const int MAX_LIST = 20;
-typedef MovieType ListItemType;
+//typedef MovieType ListItemType;
 
 using namespace std;
 
 
-//template<class ListItemType>
-
-
+template<class ListItemType>
 class SortedMovieList{
 public:
     SortedMovieList();
