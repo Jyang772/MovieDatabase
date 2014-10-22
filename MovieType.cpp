@@ -113,6 +113,40 @@ bool MovieType::ReadOneMovieFromFile(ifstream& file){
 
 //Miscellaneous:
 
+
+bool MovieType::operator>(const MovieType& right){
+
+    if(this->compareKeys(right) > 0)
+        return true;
+    else
+        return false;
+}
+
+bool MovieType::operator<(const MovieType& right){
+
+    return(!operator>(right));
+}
+
+bool MovieType::operator>=(const MovieType& right){
+
+    return(operator>(right) || this->compareKeys(right) == 0);
+}
+
+bool MovieType::operator<=(const MovieType& right){
+
+    return((!operator>(right)) || this->compareKeys(right) == 0);
+
+}
+
+bool MovieType::operator==(const MovieType& right){
+    return(this->compareKeys(right) == 0);
+}
+
+bool MovieType::operator!=(const MovieType& right){
+    return(!(this->compareKeys(right) == 0));
+}
+
+
 bool MovieType::findRelated(string & name){
 
     //Precondition: valid name.
@@ -122,8 +156,9 @@ bool MovieType::findRelated(string & name){
     unsigned int match = 0;
 
     for(unsigned int j=0; j<m_title.length();j++){
-        if(tolower(m_title[j]) == tolower(name[match]))
+        if(tolower(m_title[j]) == tolower(name[match])){
             match++;
+        }
         else{
             if(tolower(m_title[j]) == tolower(name[0]))
                 match = 1;
@@ -133,9 +168,7 @@ bool MovieType::findRelated(string & name){
         if(match == name.length()){
             return true;
         }
-        else if(match == name.length()/2){
-            return true;
-        }
+
     }
 
     return false;

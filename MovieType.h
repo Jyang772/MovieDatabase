@@ -19,6 +19,12 @@ public:
     //Miscellaneous
     bool HasStar(string&);
 
+    bool operator>(const MovieType&);
+    bool operator<(const MovieType&);
+    bool operator>=(const MovieType&);
+    bool operator<=(const MovieType&);
+    bool operator==(const MovieType&);
+    bool operator!=(const MovieType&);
 
 
 private:

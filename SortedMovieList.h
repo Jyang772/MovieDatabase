@@ -2,6 +2,7 @@
 #define SORTEDMOVIELIST_H
 
 #include "MovieType.h"
+#include <stack>
 const int MAX_LIST = 20;
 typedef MovieType ListItemType;
 
@@ -34,6 +35,10 @@ private:
 
     ListItemType items[MAX_LIST];
     int size;
+
+    stack<ListItemType> related;
+
+
 };
 
 #endif // SORTEDMOVIELIST_H

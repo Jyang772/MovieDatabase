@@ -148,9 +148,17 @@ bool SortedMovieList::findRelated(string name){
 
         if(items[i].findRelated(name)){
             ++matches;
-            items[i].Display();
-            cout << "\n";
+            //items[i].Display();
+            //cout << "\n";
+            related.push(items[i]);
         }
+    }
+
+
+    for(int i=0, size = related.size(); i<size; i++){
+        related.top().Display();
+        related.pop();
+        cout << "\n";
     }
 
     if(matches == 0)
@@ -202,66 +210,3 @@ bool SortedMovieList::findWithStar(int index, string& star){
 
 //template class SortedMovieList<MovieType>;
 
-
-
-
-
-
-//        /*****/
-//        /*Binary Search*/
-
-//        cout << "size: " << size << endl;
-//        int mid = size/2;
-//        int first = 0, last = size;
-//        string compare;
-
-//        while(true){
-
-//            compare.resize(items[mid].m_title.length());
-//            transform(items[mid].m_title.begin(),items[mid].m_title.end(),compare.begin(),::tolower);
-
-//            if(compare.compare(name) == 0){
-//                display(items[mid]);
-//                remove(mid);
-//                return;
-//            }
-//            else if(name.compare(compare) < 0)
-//                last = mid - 1;
-//            else
-//                first = mid + 1;
-
-//            if(first > last)
-//                break;
-
-//            mid = (first + last)/2;
-//        }
-//        /****/
-
-
-//    /*****/
-//    /*Binary Search*/
-
-//    cout << "size: " << size << endl;
-//    int mid = size/2;
-//    int first = 0, last = size;
-
-//    while(true){
-
-//        compare.resize(items[mid].m_title.length());
-//        transform(items[mid].m_title.begin(),items[mid].m_title.end(),compare.begin(),::tolower);
-
-//        if(compare.compare(name) == 0){
-//            display(items[mid]);
-//            return;
-//        }
-//        else if(name.compare(compare) < 0)
-//            last = mid - 1;
-//        else
-//            first = mid + 1;
-
-//        if(first > last)
-//            break;
-
-//        mid = (first + last)/2;
-//    }
-//    /****/

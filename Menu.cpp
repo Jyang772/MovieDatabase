@@ -41,7 +41,8 @@ void Menu::SearchMovies(){
     cout << "Enter movie title: ";
     getline(cin,input);
 
-    index = DataBank->find(input);
+    //index = DataBank->find(input);
+    index = DataBank->binarySearch(input);
 
     if(index != -1)
     {
@@ -52,13 +53,13 @@ void Menu::SearchMovies(){
     }
 
     cout << "\nMovie Not Found.\n\n";
-//    cout << "Displaying similar results: " << endl;
+    cout << "Displaying similar results: " << endl;
 
 
 
-//    //Miscellaneous
-//    if(!DataBank->findRelated(input))
-//        cout << "0 similar movies found.\n";
+    //Miscellaneous
+    if(!DataBank->findRelated(input))
+        cout << "0 similar movies found.\n";
 
     cout << prompt;
     cin.get();

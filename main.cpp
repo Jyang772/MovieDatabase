@@ -34,7 +34,6 @@ int main()
     ReadAllFromFile(file, dataBank);
 
 
-
     bool quit = false;
     int choice;
 
