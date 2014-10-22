@@ -79,13 +79,18 @@ bool SortedMovieList::add(const ListItemType &newItem){
 #ifdef DEBUG
     cout << "index: " << index << endl;
     cout << "size: " << size << endl;
-    cout << "-----" << endl;
+    cout << "getLength-----" << endl;
 #endif
+    return true;
 }
 
 
 
 int SortedMovieList::find(string name) {
+    //Precondition: string is valid.
+    //Postcondition: returns index of movie with same title.
+    //Iterates through list finding movie with same title. Return index if found,
+    //else return -1.
 
 
     for(int i=0; i<size;i++)
@@ -144,6 +149,7 @@ bool SortedMovieList::findRelated(string name){
         if(items[i].findRelated(name)){
             ++matches;
             items[i].Display();
+            cout << "\n";
         }
     }
 
@@ -188,9 +194,10 @@ bool SortedMovieList::findWithStar(int index, string& star){
 
     if(items[index].HasStar(star))
         return true;
+
+    return false;
 }
 
-//EXTRA PARTS
 
 
 //template class SortedMovieList<MovieType>;

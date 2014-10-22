@@ -18,14 +18,12 @@ public:
     int getLength() const;
 
     bool insert(int index, ListItemType newItem);
-
     bool add(const ListItemType& newItem); //For adding from file AND user input
-
     int find(string name);                //Finds a movie in database, returns an index
-
-
     bool remove(int index);               //Deletes movie from database
     void retrieve(int index, ListItemType& item);         //Retrieves item at index, returns it by reference in return
+
+
 
     //Miscellaneous.
     bool findWithStar(int index, string& star);
@@ -33,8 +31,27 @@ public:
     int binarySearch(string name);
 
 private:
+
     ListItemType items[MAX_LIST];
     int size;
 };
 
 #endif // SORTEDMOVIELIST_H
+
+
+
+/*
+ *    ListItemType *items = new [Capacity];
+
+    if(size == capacity)
+    {
+        Capacity *= 2;
+        ListItemType *newItems = new [Capacity]
+        for(int i=0; i<size;i++)
+                newItems[i] = items[i];
+
+        delete [] items;
+        items = newItems;
+
+    }
+*/

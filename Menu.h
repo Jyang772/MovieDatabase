@@ -21,7 +21,7 @@ public:
 
 private:
     SortedMovieList* DataBank;
-    MovieType temp;
+    //MovieType temp;//local var?
     string prompt;
 };
 

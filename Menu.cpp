@@ -7,9 +7,15 @@ Menu::Menu(SortedMovieList* DataBank) : DataBank(DataBank){
 }
 
 void Menu::DisplayAllMovies(/*SortedMovieList& DataBank*/){
+    //Precondition: None.
+    //Postcondition: Output all movies in database.
+    //Iterates through DataBank items and calls their Display() function.
 
 
     cout << "Displaying all Movies: \n";
+
+    MovieType temp;
+
     for(int i=0; i<DataBank->getLength();i++){
 
         DataBank->retrieve(i,temp);
@@ -25,7 +31,11 @@ void Menu::DisplayAllMovies(/*SortedMovieList& DataBank*/){
 }
 
 void Menu::SearchMovies(){
+    //Precondition: None.
+    //Postcondition: Matched and Related movies are displayed.
+    //Gets user input, attempts to find movie in database. If not found, show related movies.
 
+    MovieType temp;
     int index = -1;
     string input;
     cout << "Enter movie title: ";
@@ -33,25 +43,32 @@ void Menu::SearchMovies(){
 
     index = DataBank->find(input);
 
-    if(index != -1){
+    if(index != -1)
+    {
         DataBank->retrieve(index,temp);
         temp.Display();
         cin.get();
         return;
     }
 
-        cout << "\nMovie Not Found.\n\n";
-        cout << "Displaying similar results: " << endl;
+    cout << "\nMovie Not Found.\n\n";
+//    cout << "Displaying similar results: " << endl;
 
-        if(!DataBank->findRelated(input))
-            cout << "0 similar movies found.\n";
 
-        cout << prompt;
-        cin.get();
-        return;
+
+//    //Miscellaneous
+//    if(!DataBank->findRelated(input))
+//        cout << "0 similar movies found.\n";
+
+    cout << prompt;
+    cin.get();
+    return;
 }
 
 void Menu::DeleteMovie(){
+    //Precondition: None.
+    //Postcondition: Movie is deleted if found.
+    //Gets user input. If movie exists it is deleted. Otherwise show error message.
 
     int index = -1;
     string input;
@@ -61,8 +78,10 @@ void Menu::DeleteMovie(){
 
     index = DataBank->find(input);
 
-    if(DataBank->remove(index))
+    if(index != -1){
+        if(DataBank->remove(index) != -1)
         cout << input << " has been removed.\n";
+    }
     else
         cout << "Movie Not Found!\n";
 
@@ -71,9 +90,14 @@ void Menu::DeleteMovie(){
 }
 
 void Menu::AddMovie(){
+    //Precondition: None.
+    //Postcondition: New movie is added to database.
+    //Get user input. Use temporary MovieType object to add to DataBase.
+    //If successful, return message. If not, return error message.
 
     cout << "\nAdd movie to database:\n";
 
+    MovieType temp;
     string title,studio,stars;
     int year,receipt;
     cout << "Movie title: ";
@@ -99,29 +123,48 @@ void Menu::AddMovie(){
 }
 
 void Menu::CountMovies(){
+    //Precondition: None.
+    //Postcondition: Display total movies in database.
+    //Call DataBank getLength() method.
+
     cout << "Number of movies: " << DataBank->getLength() << "\n";
     cout << prompt;
     cin.get();
 }
 
 
+
+
+
+
 //Miscellaneous:
 
 void Menu::MoviesWithStar()
 {
+    //Precondition: None.
+    //Postcondition: Display movies with star.
+    //Searches DataBank items calling findWithStar() method.
+
+
     string star;
     cout << "Enter Star's Name: ";
     getline(cin,star);
 
 
-    for(int i=0; DataBank->getLength(); i++)
+    MovieType temp;
+    int size = DataBank->getLength();
+
+    for(int i=0; i < size; i++)
     {
         if(DataBank->findWithStar(i,star))
         {
             DataBank->retrieve(i,temp);
             temp.Display();
+            cout << "\n";
         }
     }
 
+    cout << prompt << endl;
+    cin.get();
 
 }

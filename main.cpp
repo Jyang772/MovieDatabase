@@ -22,18 +22,21 @@ void ReadAllFromFile(ifstream& file, SortedMovieList& dataBank){
 int main()
 {
     ifstream file;
-    file.open("Movies1.txt");// open???
+    string fileName = "Movies1.txt";
+    file.open(fileName.c_str());// open???
 
     if(!file.is_open())
-        cout << "ERROR! FILE NOT FOUND!\n";
-
-    bool quit = false;
-    int choice;
+        cout << "ERROR! " << fileName << " NOT FOUND!\n";
 
 
     SortedMovieList dataBank;
     Menu menu(&dataBank); //Initialize this menu with a dataBank.
     ReadAllFromFile(file, dataBank);
+
+
+
+    bool quit = false;
+    int choice;
 
     do{
         cout << "------------------------------" << endl;
@@ -49,6 +52,10 @@ int main()
 
 
         cin >> choice;
+        if(!cin){
+            cin.clear();
+        }
+
         cin.ignore(50,'\n');
 
         switch(choice){
