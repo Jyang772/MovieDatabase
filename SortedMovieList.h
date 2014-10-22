@@ -15,6 +15,7 @@ using namespace std;
 class SortedMovieList{
 public:
     SortedMovieList();
+    ~SortedMovieList();
     bool isEmpty() const;
     int getLength() const;
 
@@ -31,10 +32,15 @@ public:
     bool findRelated(string name);
     int binarySearch(string name);
 
+    void grow();
+
 private:
 
-    ListItemType items[MAX_LIST];
+    //ListItemType items[MAX_LIST];
+
+    ListItemType *items;
     int size;
+    int capacity;
 
     stack<ListItemType> related;
 

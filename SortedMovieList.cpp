@@ -8,8 +8,15 @@
 
 //#define DEBUG
 
-SortedMovieList::SortedMovieList() : size(0){}
+SortedMovieList::SortedMovieList() : size(0){
 
+    capacity = 10;
+    items = new ListItemType[capacity];
+}
+
+SortedMovieList::~SortedMovieList(){
+    delete [] items;
+}
 
 bool SortedMovieList::isEmpty() const{
     // Determines whether a list is empty.
@@ -43,7 +50,7 @@ bool SortedMovieList::insert(int index, ListItemType newItem){
 
     //Insert MovieType structure into list
 
-    if(size == MAX_LIST || index < 0 || index > size )
+    if(index < 0 || index > size )
         return false;
 
 
@@ -59,8 +66,12 @@ bool SortedMovieList::insert(int index, ListItemType newItem){
 bool SortedMovieList::add(const ListItemType &newItem){
     //Insert MovieType structure last
 
-    if(size == MAX_LIST)
-        return false;
+//    if(size == MAX_LIST)
+//        return false;
+
+    if(size == capacity)
+        grow();
+
 
     int index = size; //Set to last if item is bigger than rest
 
@@ -84,7 +95,20 @@ bool SortedMovieList::add(const ListItemType &newItem){
     return true;
 }
 
+void SortedMovieList::grow(){
 
+    capacity *= 2;
+
+    ListItemType *newItems = new ListItemType[capacity];
+
+    for(int i=0; i<size; i++)
+        newItems[i] = items[i];
+
+    delete [] items;
+
+    items = newItems;
+
+}
 
 int SortedMovieList::find(string name) {
     //Precondition: string is valid.
