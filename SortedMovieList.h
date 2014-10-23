@@ -3,7 +3,7 @@
 
 #include "MovieType.h"
 #include <stack>
-const int MAX_LIST = 20;
+//const int MAX_LIST = 20;
 //typedef MovieType ListItemType;
 
 using namespace std;

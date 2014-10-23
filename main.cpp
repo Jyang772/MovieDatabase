@@ -28,7 +28,6 @@ int main()
     if(!file.is_open())
         cout << "ERROR! " << fileName << " NOT FOUND!\n";
 
-
     SortedMovieList<MovieType> dataBank;
     Menu<MovieType> menu(&dataBank); //Initialize this menu with a dataBank.
     ReadAllFromFile(file, dataBank);

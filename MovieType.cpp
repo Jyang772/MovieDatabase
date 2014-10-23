@@ -27,8 +27,6 @@ int MovieType::compareKeys(const MovieType &p2){
     //If is first character, exit loop and return value. Otherwise if same characters, continue thru until diff. character
     //Use tolower because case must be same. Otherwise a > P ??? or A < a (a-P) == 17
 
-
-
     for(int i=0; i<length;i++)
     {
         if(tolower(m_title[i]) > tolower(p2.m_title[i])){
@@ -38,6 +36,14 @@ int MovieType::compareKeys(const MovieType &p2){
             return -1;
         }
     }
+
+    //If all characters are equal, test length. ex. bamb vs. bambi
+    if(m_title.length() > p2.m_title.length())
+        return 1;
+    else if(m_title.length() < p2.m_title.length())
+        return -1;
+
+    //Else if equal, return 0;
     return 0;
 }
 
