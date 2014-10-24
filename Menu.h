@@ -3,10 +3,10 @@
 
 #include "SortedMovieList.h"
 
-template <class ListItemType>
+template <class T>
 class Menu{
 public:
-    Menu(SortedMovieList<ListItemType>*);
+    Menu(SortedMovieList<T>*);
     void DisplayAllMovies();
     void SearchMovies();
     void DeleteMovie();
@@ -20,7 +20,7 @@ public:
 
 
 private:
-    SortedMovieList<ListItemType>* DataBank;
+    SortedMovieList<T>* DataBank;
     //MovieType temp;//local var?
     string prompt;
 };

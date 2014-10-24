@@ -4,12 +4,12 @@
 #include "MovieType.h"
 #include <stack>
 //const int MAX_LIST = 20;
-//typedef MovieType ListItemType;
+//typedef MovieType T;
 
 using namespace std;
 
 
-template<class ListItemType>
+template<class T>
 class SortedMovieList{
 public:
     SortedMovieList();
@@ -17,11 +17,11 @@ public:
     bool isEmpty() const;
     int getLength() const;
 
-    bool insert(int index, ListItemType newItem);
-    bool add(const ListItemType& newItem); //For adding from file AND user input
+    bool insert(int index, T newItem);
+    bool add(const T& newItem); //For adding from file AND user input
     int find(string name);                //Finds a movie in database, returns an index
     bool remove(int index);               //Deletes movie from database
-    void retrieve(int index, ListItemType& item);         //Retrieves item at index, returns it by reference in return
+    void retrieve(int index, T& item);         //Retrieves item at index, returns it by reference in return
 
 
 
@@ -34,13 +34,13 @@ public:
 
 private:
 
-    //ListItemType items[MAX_LIST];
+    //T items[MAX_LIST];
 
-    ListItemType *items;
+    T *items;
     int size;
     int capacity;
 
-    stack<ListItemType> related;
+    stack<T> related;
 
 
 };
@@ -50,12 +50,12 @@ private:
 
 
 /*
- *    ListItemType *items = new [Capacity];
+ *    T *items = new [Capacity];
 
     if(size == capacity)
     {
         Capacity *= 2;
-        ListItemType *newItems = new [Capacity]
+        T *newItems = new [Capacity]
         for(int i=0; i<size;i++)
                 newItems[i] = items[i];
 

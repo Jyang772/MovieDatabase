@@ -1,12 +1,12 @@
 #include "Menu.h"
 
-template <class ListItemType>
-Menu<ListItemType>::Menu(SortedMovieList<ListItemType>* DataBank) : DataBank(DataBank){
+template <class T>
+Menu<T>::Menu(SortedMovieList<T>* DataBank) : DataBank(DataBank){
     //DataBank = DataBank;
     prompt = "Press [ENTER] to continue...\n";
 }
-template <class ListItemType>
-void Menu<ListItemType>::DisplayAllMovies(/*SortedMovieList& DataBank*/){
+template <class T>
+void Menu<T>::DisplayAllMovies(){
     //Precondition: None.
     //Postcondition: Output all movies in database.
     //Iterates through DataBank items and calls their Display() function.
@@ -30,8 +30,8 @@ void Menu<ListItemType>::DisplayAllMovies(/*SortedMovieList& DataBank*/){
     cin.get();
 }
 
-template <class ListItemType>
-void Menu<ListItemType>::SearchMovies(){
+template <class T>
+void Menu<T>::SearchMovies(){
     //Precondition: None.
     //Postcondition: Matched and Related movies are displayed.
     //Gets user input, attempts to find movie in database. If not found, show related movies.
@@ -49,6 +49,7 @@ void Menu<ListItemType>::SearchMovies(){
     {
         DataBank->retrieve(index,temp);
         temp.Display();
+        cout << prompt << endl;
         cin.get();
         return;
     }
@@ -67,8 +68,8 @@ void Menu<ListItemType>::SearchMovies(){
     return;
 }
 
-template <class ListItemType>
-void Menu<ListItemType>::DeleteMovie(){
+template <class T>
+void Menu<T>::DeleteMovie(){
     //Precondition: None.
     //Postcondition: Movie is deleted if found.
     //Gets user input. If movie exists it is deleted. Otherwise show error message.
@@ -92,8 +93,8 @@ void Menu<ListItemType>::DeleteMovie(){
     cin.get();
 }
 
-template <class ListItemType>
-void Menu<ListItemType>::AddMovie(){
+template <class T>
+void Menu<T>::AddMovie(){
     //Precondition: None.
     //Postcondition: New movie is added to database.
     //Get user input. Use temporary MovieType object to add to DataBase.
@@ -126,8 +127,8 @@ void Menu<ListItemType>::AddMovie(){
     cin.get();
 }
 
-template <class ListItemType>
-void Menu<ListItemType>::CountMovies(){
+template <class T>
+void Menu<T>::CountMovies(){
     //Precondition: None.
     //Postcondition: Display total movies in database.
     //Call DataBank getLength() method.
@@ -143,8 +144,8 @@ void Menu<ListItemType>::CountMovies(){
 
 //Miscellaneous:
 
-template <class ListItemType>
-void Menu<ListItemType>::MoviesWithStar()
+template <class T>
+void Menu<T>::MoviesWithStar()
 {
     //Precondition: None.
     //Postcondition: Display movies with star.

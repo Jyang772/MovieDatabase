@@ -55,9 +55,6 @@ int MovieType::compareKeys(string title){
     int length = m_title.length() > title.length() ? title.length() : m_title.length();
 
 
-        if(m_title.length() != title.length())
-            return -1;
-
     //Compare each character. Z > A. If greater than and index of original title == 0. Done. Otherwise continue.
     //Iterate through each character. If a character is greater than the other, return -1,0,1.
     //If is first character, exit loop and return value. Otherwise if same characters, continue thru until diff. character
