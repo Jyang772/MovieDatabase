@@ -11,7 +11,7 @@
 template <class T>
 SortedMovieList<T>::SortedMovieList() : size(0){
 
-    capacity = 10;
+    capacity = 1;
     items = new T[capacity];
 }
 
